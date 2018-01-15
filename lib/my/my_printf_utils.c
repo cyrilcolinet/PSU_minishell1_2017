@@ -33,6 +33,7 @@ pf set_function(int offset)
 
 pf *flag_functions(pf **arr)
 {
+	int i;
 	*arr = (pf*)malloc(sizeof(pf) * 17);
 
 	if (*arr == NULL) {
@@ -40,7 +41,7 @@ pf *flag_functions(pf **arr)
 		return (NULL);
 	}
 
-	for (int i = 0; i < 17; i++)
+	for (i = 0; i < 17; i++)
 		(*arr)[i] = set_function(i);
 
 	return (*arr);
