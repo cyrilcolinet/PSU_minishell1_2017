@@ -1,4 +1,4 @@
-# Mini Shell - to the 42sh and beyond...
+# Mini Shell - to the 42sh and beyond... [![Build Status](https://travis-ci.org/mrlizzard/PSU_minishell1_2017.svg?branch=master)](https://travis-ci.org/mrlizzard/PSU_minishell1_2017)
 
 - **Binary name:** mysh
 - **Repository name:** PSU_minishell1_2017
