@@ -1,4 +1,4 @@
-# Mini Shell
+# Mini Shell - to the 42sh and beyond...
 
 - **Binary name:** mysh
 - **Repository name:** minishell1_2017
