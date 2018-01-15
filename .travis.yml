@@ -1,4 +1,4 @@
 language: c
 group: stable
-dist: fedora
 os: linux
+script: make re
