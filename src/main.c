@@ -5,11 +5,18 @@
 ** Main function
 */
 
+# include "my.h"
 # include "minishell.h"
 
-int main(void)
+int main(int ac, char **av, char **env)
 {
-	int res = minishell();
+	int res;
 
-	return (res);
+	if (ac == 1 && str_equals(av[0], "./mysh")) {
+		res = minishell(env);
+		return (res);
+	}
+
+	my_puterr("Too much argument or false binary name.", false);
+	return (84);
 }

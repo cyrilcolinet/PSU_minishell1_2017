@@ -12,7 +12,9 @@ NAME 			= mysh
 UT_NAME 		= units
 
 SRC 			= src/main.c 					\
-				  src/minishell.c
+				  src/minishell.c 				\
+				  src/utils.c 					\
+				  src/controls.c
 
 UT_SRC 			= src/main.c 					\
 				  src/minishell.c 				\
