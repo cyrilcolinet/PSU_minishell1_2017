@@ -9,7 +9,8 @@
 
 NAME 			= mysh
 
-SRC 			= src/main.c 			
+SRC 			= src/main.c 				\
+				  src/minishell.c
 
 CFLAGS 			= -Wall -Wextra -I./include
 
