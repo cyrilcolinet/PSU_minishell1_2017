@@ -13,7 +13,7 @@ SRC 			= src/main.c
 
 CFLAGS 			= -Wall -Wextra -I./include
 
-EXTRA_FLAGS 	= -L./lib/ -lmy -libgnl
+EXTRA_FLAGS 	= -L./lib/ -lmy -lgnl
 
 CC 				= gcc
 
