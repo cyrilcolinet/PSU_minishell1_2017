@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2017
-## my_sokoban
+## minishell
 ## File description:
 ## Makefile with build project rule and units tests
 ##
