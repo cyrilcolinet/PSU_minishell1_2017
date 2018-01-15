@@ -49,7 +49,13 @@ SRC 				= my_atoi.c 					\
 					  my_swap.c 					\
 					  my_trim.c 					\
 					  my_realloc.c 					\
-					  my_getline.c
+					  my_getline.c 					\
+					  my_printf_flags_hexadecimal.c \
+					  my_printf_flags_number.c 		\
+					  my_printf_flags_string.c 		\
+					  my_printf_flags_unsigned.c	\
+					  my_printf_utils.c 			\
+					  my_printf.c
 
 CFLAGS 				= -Wall -Wextra -Werror -I./include
 

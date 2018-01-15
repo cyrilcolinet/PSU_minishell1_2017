@@ -9,5 +9,6 @@
 
 int minishell(void)
 {
+	my_printf("%s !", "salut");
 	return (0);
 }

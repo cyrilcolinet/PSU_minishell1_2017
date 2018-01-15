@@ -22,7 +22,7 @@ CFLAGS 			= -Wall -Wextra -I./include --coverage
 
 UT_CFLAGS 		= -lcriterion -lgcov --coverage
 
-EXTRA_FLAGS 	=  -L./lib -lmy -lmy_printf -lgnl -g3
+EXTRA_FLAGS 	= -L./lib -lmy -lgnl -g3
 
 CC 				= gcc
 

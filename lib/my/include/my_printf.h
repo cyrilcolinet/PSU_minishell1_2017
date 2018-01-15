@@ -22,7 +22,6 @@ typedef struct param {
 
 int 	check_match(char *ptr, param_t *param, int out, va_list ap);
 void 	start(char *format, param_t *param, va_list ap);
-void 	my_printf(char *format, ...);
 
 pf 		*flags_functions(pf **arr);
 void 	configure(param_t *param, char *flags);

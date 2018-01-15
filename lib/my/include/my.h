@@ -324,4 +324,12 @@ char *my_realloc(char *ptr, unsigned int size);
 **/
 char *my_getline(int fdesc);
 
-#endif
+/**
+** Printf function recoded
+** @param (char *) format
+** @param (...) va_list <stdarg.h>
+** @return (void)
+**/
+void my_printf(char *format, ...);
+
+# endif

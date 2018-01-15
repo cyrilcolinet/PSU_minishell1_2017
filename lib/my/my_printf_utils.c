@@ -16,7 +16,7 @@ pf set_function(int offset)
 	else if (offset == 2) ret = flag_s;
 	else if (offset == 3) ret = flag_S;
 	else if (offset == 4) ret = flag_c;
-	else if (offset == 5) ret = flag_p;
+	//else if (offset == 5) ret = flag_p;
 	else if (offset == 6) ret = flag_x;
 	else if (offset == 7) ret = flag_X;
 	else if (offset == 8) ret = flag_o;

@@ -39,7 +39,7 @@ int flag_X(va_list ap, int out, char *ptr)
 	return (out);
 }
 
-int flag_p(va_list ap, int out, char *ptr)
+/*int flag_p(va_list ap, int out, char *ptr)
 {
 	//void *str = va_arg(ap, void *);
 
@@ -49,4 +49,4 @@ int flag_p(va_list ap, int out, char *ptr)
 	out += write(0, "0x7fff", 6);
 	out += my_put_nbr_base(10, "0123456789abcdef");
 	return (out);
-}
+}*/

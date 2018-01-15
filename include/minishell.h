@@ -8,6 +8,7 @@
 # ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "my.h"
 # include "gnl.h"
 
 int 	minishell(void);
