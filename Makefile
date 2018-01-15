@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2017
-## my_printf
+## minishell
 ## File description:
 ## Makefile with build project rule and units tests
 ##
@@ -18,11 +18,11 @@ UT_SRC 			= src/main.c 					\
 				  src/minishell.c 				\
 				  tests/minishell_tests.c
 
-CFLAGS 			= -Wall -Wextra -I./include
+CFLAGS 			= -Wall -Wextra -I./include --coverage
 
 UT_CFLAGS 		= -lcriterion -lgcov --coverage
 
-EXTRA_FLAGS 	=  -L./lib -lmy -lmy_printf -lgnl -g3 --coverage
+EXTRA_FLAGS 	=  -L./lib -lmy -lmy_printf -lgnl -g3
 
 CC 				= gcc
 
