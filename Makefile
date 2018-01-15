@@ -1,20 +1,28 @@
 ##
 ## EPITECH PROJECT, 2017
-## minishell
+## my_printf
 ## File description:
 ## Makefile with build project rule and units tests
 ##
 
-.PHONY			: all, fclean, clean, re, tests_run, library
+.PHONY			: all, fclean, clean, re, tests_run, lib
 
 NAME 			= mysh
 
-SRC 			= src/main.c 				\
+UT_NAME 		= units
+
+SRC 			= src/main.c 					\
 				  src/minishell.c
+
+UT_SRC 			= src/main.c 					\
+				  src/minishell.c 				\
+				  tests/minishell_tests.c
 
 CFLAGS 			= -Wall -Wextra -I./include
 
-EXTRA_FLAGS 	= -L./lib/ -lmy -lgnl
+UT_CFLAGS 		= -lcriterion -lgcov --coverage
+
+EXTRA_FLAGS 	=  -L./lib -lmy -lmy_printf -lgnl -g3 --coverage
 
 CC 				= gcc
 
@@ -22,24 +30,30 @@ RM 				= rm -f
 
 OBJ 			= $(SRC:.c=.o)
 
-all: 			library $(NAME)
+UT_OBJ			= $(UT_SRC:.c=.o)
+
+all: 			lib $(NAME)
 
 $(NAME):		$(OBJ)
-				$(CC) $(CFLAGS) $(EXTRA_FLAGS) $(OBJ) ./lib/my/*.o -o $(NAME)
+				$(CC) $(CFLAGS) $(EXTRA_FLAGS) $(OBJ) -o $(NAME)
 
-library:
+lib:
 				make -C ./lib
 
 clean:
 				$(RM) $(OBJ)
+				$(RM) $(UT_OBJ)
 				$(RM) vgcore.*
+				$(RM) src/*.gc*
+				$(RM) tests/*.gc*
 
 fclean: 		clean
 				$(RM) $(NAME)
+				$(RM) $(UT_NAME)
 				make fclean -C ./lib
 
 re: 			fclean all
 
-tests_run:		re
-				@echo "Running units tests..."
-
+tests_run:		fclean $(UT_OBJ)
+				$(CC) $(CFLAGS) $(UT_CFLAGS) $(UT_OBJ) -o $(UT_NAME)
+				./$(UT_NAME)
