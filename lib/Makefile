@@ -16,8 +16,7 @@ libmy.a:
 clean:
 			rm -f *.o
 
-fclean:			
-			rm -f *.a
+fclean:
 			make fclean -C ./my
 			make fclean -C ./my_printf
 
