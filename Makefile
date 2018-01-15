@@ -7,7 +7,7 @@
 
 .PHONY			: all, fclean, clean, re, tests_run, library
 
-NAME 			= minishell
+NAME 			= mysh
 
 SRC 			= src/main.c 			
 
