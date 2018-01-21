@@ -5,6 +5,12 @@
 ## Makefile libmy
 ##
 
+## Color variables
+
+CYAN				= /bin/echo -e "\x1b[1m\x1b[32m\#\# $1\x1b[0m" && /bin/echo ""
+
+## Compilation variables
+
 .PHONY				: all, clean, fclean, re
 
 NAME 				= libmy.a
@@ -79,9 +85,10 @@ LIB_OBJ 			= $(SRC:.c=.o)
 all:				$(NAME)
 					$(CP) $(NAME) ../$(NAME)
 					$(CP) $(INCLUDE)/$(INCLUDE_FILE) $(REMOTE_INCLUDE)
+					@$(call CYAN, "Library successfully compiled.")
 
 $(NAME):			$(LIB_OBJ)
-					$(AR) $(NAME) $(LIB_OBJ)
+					@$(AR) $(NAME) $(LIB_OBJ)
 
 clean:
 					$(RM) $(LIB_OBJ)

@@ -42,7 +42,7 @@ void 	command_basics(param_t *param);
 void 	correct_exit(param_t *param);
 bool 	str_equals(char *src, char *find);
 char 	**copy_env(char **env, param_t *param);
-param_t *init_strcut(void);
+param_t *init_struct(void);
 void 	display_cursor(void);
 
 # endif
