@@ -12,19 +12,19 @@ NAME 			= mysh
 UT_NAME 		= units
 
 SRC 			= src/main.c 					\
-				  src/minishell.c 				\
-				  src/utils.c 					\
-				  src/controls.c
+				src/minishell.c 				\
+				src/utils.c 					\
+				src/controls.c
 
 UT_SRC 			= src/main.c 					\
-				  src/minishell.c 				\
-				  tests/minishell_tests.c
+				src/minishell.c 				\
+				tests/minishell_tests.c
 
-CFLAGS 			= -Wall -Wextra -I./include -L./lib -lmy --coverage
+CFLAGS 			= -Wall -Wextra -I./include
 
 UT_CFLAGS 		= -lcriterion -lgcov --coverage
 
-EXTRA_FLAGS 	= -g3
+EXTRA_FLAGS		= -L./lib -lmy -g3
 
 CC 				= gcc
 
