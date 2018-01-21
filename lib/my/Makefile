@@ -11,7 +11,7 @@ NAME 				= libmy.a
 
 SRC 				= my_atoi.c 					\
 					  my_compute_power_rec.c 		\
-					  my_putnbr_base.c 				\
+					  my_put_nbr_base.c				\
 					  my_compute_square_root.c 		\
 					  my_is_prime.c 				\
 					  my_find_prime_sup.c 			\

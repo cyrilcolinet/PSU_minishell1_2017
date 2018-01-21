@@ -307,7 +307,7 @@ char **my_strtok(char *str, char *delimiter);
 ** @param (char *) base
 ** @return (void)
 **/
-void my_putnbr_base(int nbr, char *base);
+void my_put_nbr_base(int nbr, char *base);
 
 /**
 ** Realloc char pointer
