@@ -10,29 +10,37 @@
 
 bool str_equals(char *src, char *find)
 {
+	int len = 0;
+
 	while (*src) {
 		if (*src == *find) {
 			src++;
 			find++;
+			len++;
+
+			if (my_strlen(find) == len)
+				return (true);
 		} else {
 			return (false);
 		}
 	}
 
-	return (true);
+	return (false);
 }
 
 char **copy_env(char **env)
 {
 	char **arr = NULL;
 	int off = 0;
+	int id = 0;
 
-	while (arr[off]) {
-		if (str_equals(env[off], "PATH"))
-			arr = my_strtok(env[off], ":");
-
-		off++;
+	for (id = 0; env[id] != NULL; id++) {
+		if (str_equals(env[id], "PATH")) {
+			arr = my_strtok(env[id], ":");
+			printf("%s\n", arr[0]);
+			return (arr);
+		}
 	}
 
-	return (arr);
+	return (NULL);
 }

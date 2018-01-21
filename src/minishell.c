@@ -30,7 +30,7 @@ int minishell(char **env)
 	param_t *param = my_malloc(sizeof(*param));
 
 	signal(SIGINT, control_c);
-	//param->env = copy_env(env);
+	param->env = copy_env(env);
 	param->env_copy = env;
 
 	if (param->env == NULL)
@@ -39,6 +39,7 @@ int minishell(char **env)
 	my_putstr("$> ");
 	start_shell(param);
 
+	free(param->env);
 	free(param);
 	return (0);
 }
