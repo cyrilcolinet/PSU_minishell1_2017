@@ -17,6 +17,7 @@
 
 typedef struct params {
 		char 	**env;
+		char 	**env_copy;
 		char 	**arg;
 		char	buff[4067];
 		pid_t 	pid;
