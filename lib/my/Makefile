@@ -73,17 +73,17 @@ REMOTE_INCLUDE 		= ../../include/
 
 INCLUDE_FILE		= my.h
 
-OBJ 				= $(SRC:.c=.o)
+LIB_OBJ 			= $(SRC:.c=.o)
 
 all:				$(NAME)
 					$(CP) $(NAME) ../$(NAME)
 					$(CP) $(INCLUDE)/$(INCLUDE_FILE) $(REMOTE_INCLUDE)
 
-$(NAME):			$(OBJ)
-					$(AR) $(NAME) $(OBJ)
+$(NAME):			$(LIB_OBJ)
+					$(AR) $(NAME) $(LIB_OBJ)
 
 clean:
-					$(RM) $(OBJ)
+					$(RM) $(LIB_OBJ)
 
 fclean: 			clean
 					$(RM) ../$(NAME)

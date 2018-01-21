@@ -24,7 +24,7 @@ CFLAGS 			= -Wall -Wextra -I./include
 
 UT_CFLAGS 		= -lcriterion -lgcov --coverage
 
-EXTRA_FLAGS		= -L./lib -lmy -g3
+EXTRA_FLAGS		= -L./lib/ -lmy -g3
 
 CC 				= gcc
 
@@ -32,12 +32,14 @@ RM 				= rm -f
 
 OBJ 			= $(SRC:.c=.o)
 
+LIB_OBJ			= ./lib/my.*.o
+
 UT_OBJ			= $(UT_SRC:.c=.o)
 
 all: 			lib $(NAME)
 
 $(NAME):		$(OBJ)
-				$(CC) $(CFLAGS) $(EXTRA_FLAGS) $(OBJ) -o $(NAME)
+				$(CC) $(CFLAGS) $(EXTRA_FLAGS) $(OBJ) $(LIB_OBJ) -o $(NAME)
 
 lib:
 				make -C ./lib
