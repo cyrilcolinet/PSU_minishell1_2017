@@ -38,8 +38,8 @@ char **copy_env(char **env)
 		if (str_equals(env[id], "PATH")) {
 			arr = my_strtok(env[id], ":");
 			tmp = my_strtok(arr[0], "=");
-			printf("%s\n", tmp[0]);
-			//arr[0] = tmp[0][1];
+			arr[0] = tmp[1];
+
 			return (arr);
 		}
 	}
