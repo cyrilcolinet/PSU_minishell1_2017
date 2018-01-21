@@ -31,13 +31,15 @@ bool str_equals(char *src, char *find)
 char **copy_env(char **env)
 {
 	char **arr = NULL;
-	int off = 0;
+	char **tmp = NULL;
 	int id = 0;
 
 	for (id = 0; env[id] != NULL; id++) {
 		if (str_equals(env[id], "PATH")) {
 			arr = my_strtok(env[id], ":");
-			printf("%s\n", arr[0]);
+			tmp = my_strtok(arr[0], "=");
+			printf("%s\n", tmp[0]);
+			//arr[0] = tmp[0][1];
 			return (arr);
 		}
 	}
