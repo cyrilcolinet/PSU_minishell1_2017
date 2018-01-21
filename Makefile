@@ -12,13 +12,13 @@ NAME 			= mysh
 UT_NAME 		= units
 
 SRC 			= src/main.c 					\
-				src/minishell.c 				\
-				src/utils.c 					\
-				src/controls.c
+				  src/minishell.c 				\
+				  src/utils.c 					\
+				  src/controls.c
 
 UT_SRC 			= src/main.c 					\
-				src/minishell.c 				\
-				tests/minishell_tests.c
+				  src/minishell.c 				\
+				  tests/minishell_tests.c
 
 CFLAGS 			= -Wall -Wextra -I./include
 
