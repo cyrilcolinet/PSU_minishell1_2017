@@ -20,7 +20,7 @@ UT_SRC 			= src/main.c 					\
 				  src/minishell.c 				\
 				  tests/minishell_tests.c
 
-CFLAGS 			= -Wall -Wextra -I./include
+CFLAGS 			= -Wall -Wextra -I./include --coverage
 
 UT_CFLAGS 		= -lcriterion -lgcov --coverage
 
