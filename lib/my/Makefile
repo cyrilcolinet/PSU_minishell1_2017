@@ -44,6 +44,7 @@ SRC 				= my_atoi.c 					\
 					  my_strncat.c 					\
 					  my_strncpy.c 					\
 					  my_strstr.c 					\
+					  my_count_delim_part.c 		\
 					  my_strtok.c 					\
 					  my_strupcase.c 				\
 					  my_swap.c 					\

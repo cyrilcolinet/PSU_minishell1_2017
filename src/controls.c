@@ -11,14 +11,10 @@
 void control_c(void)
 {
 	my_putchar('\n');
-	my_putstr("$> ");
+	display_cursor();
 }
 
-void control_exit(char *buff)
+void pid_management(param_t *param, int pid)
 {
-	char *res = my_strstr("exit", buff);
-
-	if (res == 0) {
-		exit(0);
-	}
+	
 }

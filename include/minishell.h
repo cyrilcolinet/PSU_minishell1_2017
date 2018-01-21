@@ -13,10 +13,15 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <signal.h>
+# include <sys/errno.h>
 # include <sys/types.h>
+# include <sys/stat.h>
+
+typedef struct stat stat_t;
 
 typedef struct params {
 		char 	**env;
+		int 	env_size;
 		char 	**env_copy;
 		char 	**arg;
 		char	buff[4067];
@@ -29,9 +34,13 @@ typedef struct params {
 int 	minishell(char **env);
 
 void 	control_c(void);
-void 	control_exit(char *buff);
 
+void 	command_exit(char *buffer);
+
+void 	correct_exit(param_t *param);
 bool 	str_equals(char *src, char *find);
-char 	**copy_env(char **env);
+char 	**copy_env(char **env, param_t *param);
+param_t *init_strcut(void);
+void 	display_cursor(void);
 
 # endif

@@ -23,23 +23,10 @@ static bool cts(char c, char *str)
 	return (false);
 }
 
-static int cnt_parts(char *str, char *delim)
-{
-	int count = 0;
-	int i;
-
-	for (i = 0; str[i]; i++) {
-		if (!cts(str[i], delim) && cts(str[i + 1], delim))
-			count++;
-	}
-
-	return (count);
-}
-
 char **my_strtok(char *str, char *delim)
 {
 	int j = 0, k = 0, i;
-	char **ret = my_malloc(sizeof(*ret) * (cnt_parts(str, delim) + 1));
+	char **ret = my_malloc(sizeof(*ret) * (my_count_delim_part(str, delim) + 1));
 
 	for (i = 0; str[i]; i++) {
 		if (!cts(str[i], delim))

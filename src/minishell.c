@@ -16,6 +16,9 @@ void start_shell(param_t *param)
 
 	while (param->fdesc > 0) {
 		param->arg = my_strtok(param->buff, " ");
+
+		command_exit(param->buff);
+
 		param->pid = fork();
 
 		if (param->pid == -1)
@@ -27,19 +30,18 @@ void start_shell(param_t *param)
 
 int minishell(char **env)
 {
-	param_t *param = my_malloc(sizeof(*param));
+	param_t *param = init_struct();
 
 	signal(SIGINT, control_c);
-	param->env = copy_env(env);
+	param->env = copy_env(env, param);
 	param->env_copy = env;
 
 	if (param->env == NULL)
 		my_puterr("Error during copy of PATH variable.\n", true);
 
-	my_putstr("$> ");
+	display_cursor();
 	start_shell(param);
+	correct_exit(param);
 
-	free(param->env);
-	free(param);
 	return (0);
 }

@@ -14,7 +14,8 @@ UT_NAME 		= units
 SRC 			= src/main.c 					\
 				  src/minishell.c 				\
 				  src/utils.c 					\
-				  src/controls.c
+				  src/controls.c 				\
+				  src/commands.c
 
 UT_SRC 			= src/main.c 					\
 				  src/minishell.c 				\

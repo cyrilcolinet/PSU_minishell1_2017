@@ -120,6 +120,15 @@ int my_strncmp(char *s1, char *s2, int n);
 int my_str_isalpha(char *str);
 
 /**
+** Count delimer parts
+** @param (char *) str
+** @param (char *) delim
+** @return (int) - Return the count of parts delimter by a delimier
+** specified in argument...
+**/
+int my_count_delim_part(char *str, char *delim);
+
+/**
 ** Check if string contains ONLY numeric characters
 ** @param (char const) *str
 ** @return (int) - Return 1 if the string contains only
