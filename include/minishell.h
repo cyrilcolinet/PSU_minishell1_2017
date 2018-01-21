@@ -16,6 +16,7 @@
 # include <sys/errno.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 
 typedef struct stat stat_t;
 
@@ -36,6 +37,7 @@ int 	minishell(char **env);
 void 	control_c(void);
 
 void 	command_exit(char *buffer);
+void 	command_basics(param_t *param);
 
 void 	correct_exit(param_t *param);
 bool 	str_equals(char *src, char *find);
