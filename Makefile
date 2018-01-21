@@ -32,7 +32,7 @@ RM 				= rm -f
 
 OBJ 			= $(SRC:.c=.o)
 
-LIB_OBJ			= ./lib/my.*.o
+LIB_OBJ			= ./lib/my/*.o
 
 UT_OBJ			= $(UT_SRC:.c=.o)
 
