@@ -88,7 +88,7 @@ all:				$(NAME)
 					@$(call SUCCESS, "Header\(s\) and static library\(ies\) copied.")
 
 $(NAME):			$(LIB_OBJ)
-					@$(AR) $(NAME) $(LIB_OBJ)
+					$(AR) $(NAME) $(LIB_OBJ)
 					@$(call SUCCESS, "Library successfully compiled.")
 
 clean:
