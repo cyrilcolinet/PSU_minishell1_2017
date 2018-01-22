@@ -9,5 +9,9 @@ script: make re
 notifications:
   email: false
 
+env:
+  global:
+    - CODECOV_TOKEN=c8e0c6a2-3a72-4e41-aced-b49ff9f993a9
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
