@@ -16,7 +16,6 @@ void command_exit(char *buffer)
 
 void command_basics(param_t *param)
 {
-	int i = 0;
 	int ret = execve(param->strcat, param->arg, param->env_copy);
 
 	if (ret == -1)

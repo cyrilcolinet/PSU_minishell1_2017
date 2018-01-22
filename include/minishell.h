@@ -35,6 +35,7 @@ typedef struct params {
 int 	minishell(char **env);
 
 void 	control_c(void);
+void 	pid_management(param_t *param, int pid);
 
 void 	command_exit(char *buffer);
 void 	command_basics(param_t *param);

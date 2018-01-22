@@ -7,7 +7,7 @@
 
 ## Color variables
 
-CYAN				= /bin/echo -e "\x1b[1m\x1b[32m\#\# $1\x1b[0m" && /bin/echo ""
+SUCCESS				= /bin/echo -e "\x1b[1m\x1b[33m\#\#\x1b[32m $1\x1b[0m"
 
 ## Compilation variables
 
@@ -85,10 +85,11 @@ LIB_OBJ 			= $(SRC:.c=.o)
 all:				$(NAME)
 					$(CP) $(NAME) ../$(NAME)
 					$(CP) $(INCLUDE)/$(INCLUDE_FILE) $(REMOTE_INCLUDE)
-					@$(call CYAN, "Library successfully compiled.")
+					@$(call SUCCESS, "Header\(s\) and static library\(ies\) copied.")
 
 $(NAME):			$(LIB_OBJ)
 					@$(AR) $(NAME) $(LIB_OBJ)
+					@$(call SUCCESS, "Library successfully compiled.")
 
 clean:
 					$(RM) $(LIB_OBJ)
@@ -97,5 +98,6 @@ fclean: 			clean
 					$(RM) ../$(NAME)
 					$(RM) $(NAME)
 					$(RM) $(REMOTE_INCLUDE)$(INCLUDE_FILE)
+					@$(call SUCCESS, "Library fully cleaned.")
 
 re: 				fclean all

@@ -10,7 +10,7 @@
 
 void start_shell(param_t *param)
 {
-	int pid;
+	int pid = -1;
 
 	param->fdesc = read(0, param->buff, 4067);
 
@@ -23,6 +23,8 @@ void start_shell(param_t *param)
 
 		if (param->pid == -1)
 			exit(0);
+
+		pid_management(param, pid);
 
 		param->fdesc = read(0, param->buff, 4067);
 	}
