@@ -4,7 +4,9 @@ group: stable
 
 os: linux
 
-script: make re
+script:
+  - make re
+  - echo "exit" | ./mysh
 
 notifications:
   email: false
