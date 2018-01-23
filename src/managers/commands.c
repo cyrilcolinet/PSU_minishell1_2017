@@ -62,9 +62,7 @@ int exec_command(char **command, param_t *param)
 		}
 	}
 
-	my_putstr("Error: unknown command '");
-	my_putstr(command[0]);
-	my_putstr("'.\n");
+	my_printf("Error: unknown command '%s'.\n", command[0]);
 
 	return (0);
 }
