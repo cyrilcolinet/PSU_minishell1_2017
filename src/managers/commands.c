@@ -17,19 +17,14 @@ int check_binaries(char **command)
 int check_command(char *command, param_t *param)
 {
 	int i = 0;
+	int res = 0;
 
 	while (my_strcmp(param->com->command, command) && i < 7) {
 		param->com++;
 		i++;
 	}
 
-	if (i == 7) {
-		return (0);
-	} else {
-		return (param->com->fct(command + 1, param->env));
-	}
-
-	return (0);
+	return ((i >= 7) ? 0 : param->com->fct(command + 1, param->env));
 }
 
 int run_command(char *path, char **args, param_t *param)
