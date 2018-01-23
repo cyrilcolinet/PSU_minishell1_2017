@@ -30,6 +30,7 @@ void exit_minishell(param_t *param)
 	free(param->builtin);
 	free(param->com);
 	free(param);
+	write(1, "\n", 1);
 	exit(0);
 }
 
@@ -49,7 +50,7 @@ int minishell(int ac, char **av, char **env)
 		signal(SIGINT, signal_handler);
 		redirect_stdin(&stdin, param);
 
-		if ((result = exec_command(stdin)) == -1)
+		if ((result = exec_command(stdin, param)) == -1)
 			break;
 	}
 

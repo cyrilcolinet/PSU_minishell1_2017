@@ -8,6 +8,14 @@
 # include "my.h"
 # include "minishell.h"
 
+void proc_signal_handler(int sig)
+{
+	if (sig == SIGINT) {
+		my_putstr("\n");
+		signal(SIGINT, proc_signal_handler);
+	}
+}
+
 void signal_handler(int sig)
 {
 	if (sig == SIGINT) {
