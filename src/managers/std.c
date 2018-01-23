@@ -10,14 +10,18 @@
 
 char *parse_shell_pwd(char *path, int reverse)
 {
-	char *home = "/home/cyrilcolinet/";
-	char *new;
+	int loop;
+	int count = my_count_delim_part(path, "/");
+	char **re = my_strtok(path, "/");
+	char *new = my_strdup(re[count - 1]);
 	(void)reverse;
 
-	if (path == NULL)
-		return (NULL);
+	for (loop = 0; loop < count; loop++)
+		free(re[loop]);
 
-	return (path);
+	free(re);
+
+	return (new);
 }
 
 void display_shell(void)
@@ -27,7 +31,7 @@ void display_shell(void)
 	char *pcwd = parse_shell_pwd(cwd, 0);
 
 	my_putstr(pcwd);
-	//free(pcwd);
+	free(pcwd);
 	my_putstr(" \033[31m︻\033[0m\033[32m┳\033[0m\033[33mデ");
 	my_putstr("\033[0m\033[34m═\033[0m\033[35m—\033[0m$ ");
 }
