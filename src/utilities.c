@@ -22,7 +22,7 @@ pCom *configure_commands(pCom **arr)
 	(*arr)[2] = exit_command;
 	(*arr)[3] = exit_command;
 	(*arr)[4] = exit_command;
-	(*arr)[5] = exit_command;
+	(*arr)[5] = env_command;
 
 	return (*arr);
 }

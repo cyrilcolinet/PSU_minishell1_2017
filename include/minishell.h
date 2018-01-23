@@ -20,7 +20,7 @@
 # include <sys/wait.h>
 
 typedef struct stat stat_t;
-typedef int (*pCom)(char *, char *);
+typedef int (*pCom)(char *, char *, char **);
 
 typedef struct commands {
 		char	*command;
@@ -52,6 +52,7 @@ int 	check_command(char **command);
 int 	run_command(char *path, char **args, param_t *param);
 int 	exec_command(char **command, param_t *param);
 
-int 	exit_command(char *stdin, char *command);
+int 	exit_command(char *stdin, char *command, char **env);
+int 	env_command(char *stdin, char *command, char **env);
 
 # endif

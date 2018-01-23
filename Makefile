@@ -24,7 +24,8 @@ SRC 		= src/main.c 					\
 		  	  src/managers/environment.c 	\
 		  	  src/managers/commands.c 		\
 		  	  src/managers/std.c 			\
-		  	  src/commands/exit_command.c
+		  	  src/commands/exit_command.c 	\
+		  	  src/commands/env_command.c
 
 UT_SRC 		= src/main.c 					\
 		  src/minishell.c 				\
