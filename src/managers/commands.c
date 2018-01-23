@@ -14,9 +14,21 @@ int check_binaries(char **command)
 	return (0);
 }
 
-int check_command(char **command)
+int check_command(char *command, param_t *param)
 {
-	(void)command;
+	int i = 0;
+
+	while (my_strcmp(param->com->command, command) && i < 7) {
+		param->com++;
+		i++;
+	}
+
+	if (i == 7) {
+		return (0);
+	} else {
+		return (param->com->fct(command + 1, param->env));
+	}
+
 	return (0);
 }
 
@@ -45,7 +57,7 @@ int run_command(char *path, char **args, param_t *param)
 int exec_command(char **command, param_t *param)
 {
 	stat_t info;
-	int own = check_command(command);
+	int own = check_command(command[0], param);
 	command = my_strtok(command[0], " ");
 
 	if (own == 1 || check_binaries(command))

@@ -8,7 +8,7 @@
 # include "my.h"
 # include "minishell.h"
 
-int env_command(char *stdin, char *command, char **env)
+int env_command(char *stdin, char **env)
 {
 	int i = -1;
 
