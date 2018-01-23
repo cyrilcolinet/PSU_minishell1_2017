@@ -46,6 +46,7 @@ int exec_command(char **command, param_t *param)
 {
 	stat_t info;
 	int own = check_command(command);
+	command = my_strtok(command[0], " ");
 
 	if (own == 1 || check_binaries(command))
 		return (0);
@@ -57,7 +58,6 @@ int exec_command(char **command, param_t *param)
 			//change_dir(command[0], 0);
 			return (0);
 		} else if (info.st_mode & S_IXUSR) {
-			my_putstr("i'm here\n");
 			return (run_command(my_strdup(command[0]), command, param));
 		}
 	}
