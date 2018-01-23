@@ -41,7 +41,9 @@ void 	env_configure(char **env, param_t *param);
 void 	signal_handler(int signal);
 
 param_t *configure_params(void);
+
 void 	display_shell(void);
+void 	redirect_stdin(char **stdin);
 
 int 	exit_command(char *stdin, char *command);
 

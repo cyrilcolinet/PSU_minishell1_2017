@@ -20,6 +20,8 @@ void exit_minishell(param_t *param)
 		free(param->env);
 	}
 
+	free(param->builtin);
+	free(param->com);
 	free(param);
 	exit(0);
 }

@@ -41,6 +41,25 @@ void configure_pointer_com(param_t *param)
 	}
 }
 
+char **configure_builtin(void)
+{
+	char **builin = malloc(sizeof(char *) * 7);
+	int key = 0;
+
+	if (builtin == NULL)
+		return (NULL);
+
+	builtin[0] = "exit";
+	builtin[1] = "echo";
+	builtin[2] = "cd";
+	builtin[3] = "setenv";
+	builtin[4] = "unsetenv";
+	builtin[5] = "env";
+	builtin[6] = NULL;
+
+	return (builtin);
+}
+
 param_t *configure_params(void)
 {
 	param_t *param = malloc(sizeof(*param));
@@ -52,22 +71,12 @@ param_t *configure_params(void)
 
 	param->env = NULL;
 	param->com = malloc(sizeof(com_t) * 6);
-	param->builtin = malloc(sizeof(char *) * 6);
+	param->builtin = configure_builtin();
 
-	if (param->com == NULL || param->builtin)
+	if (param->com == NULL || param->builtin == NULL)
 		return (NULL);
 
 	configure_pointer_com(param);
 
 	return (param);
-}
-
-void display_shell(void)
-{
-	my_putstr("$> ");
-}
-
-void redirect_stdin(char **stdin)
-{
-
 }
