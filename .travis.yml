@@ -6,7 +6,6 @@ os: linux
 
 script:
   - make re
-  - echo "exit" | ./mysh
 
 notifications:
   email: false
