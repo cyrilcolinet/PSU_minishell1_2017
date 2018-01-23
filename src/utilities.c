@@ -44,7 +44,6 @@ void configure_pointer_com(param_t *param)
 char **configure_builtin(void)
 {
 	char **builtin = malloc(sizeof(char *) * 7);
-	int key = 0;
 
 	if (builtin == NULL)
 		return (NULL);

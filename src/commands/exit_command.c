@@ -9,5 +9,6 @@
 
 int exit_command(char *stdin, char *command)
 {
+	(void)command;
 	return (-1);
 }

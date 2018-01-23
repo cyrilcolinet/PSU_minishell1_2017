@@ -43,6 +43,8 @@ int minishell(int ac, char **av, char **env)
 	if (param == NULL)
 		return (84);
 
+	(void)ac;
+	(void)av;
 	env_configure(env, param);
 
 	while (true) {
@@ -50,7 +52,12 @@ int minishell(int ac, char **av, char **env)
 		signal(SIGINT, signal_handler);
 		redirect_stdin(&stdin, param);
 
-		if ((result = exec_command(stdin, param)) == -1)
+		if (*stdin == 0) {
+			free(stdin);
+			continue;
+		}
+
+		if ((result = exec_command(&stdin, param)) == -1)
 			break;
 	}
 

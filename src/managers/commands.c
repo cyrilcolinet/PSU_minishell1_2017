@@ -8,14 +8,16 @@
 # include "my.h"
 # include "minishell.h"
 
-bool check_binaries(char **command)
+int check_binaries(char **command)
 {
-	return (true);
+	(void)command;
+	return (0);
 }
 
-bool is_own_command(char **command)
+int check_command(char **command)
 {
-	return (true);
+	(void)command;
+	return (0);
 }
 
 int run_command(char *path, char **args, param_t *param)
@@ -43,11 +45,11 @@ int run_command(char *path, char **args, param_t *param)
 int exec_command(char **command, param_t *param)
 {
 	stat_t info;
-	bool own_func = is_own_command(command);
+	int own = check_command(command);
 
-	if (own_func || check_binaries(command))
+	if (own == 1 || check_binaries(command))
 		return (0);
-	else if (own_func < 0)
+	else if (own < 0)
 		return (-1);
 
 	if (lstat(command[0], &info) != -1) {
@@ -55,13 +57,14 @@ int exec_command(char **command, param_t *param)
 			//change_dir(command[0], 0);
 			return (0);
 		} else if (info.st_mode & S_IXUSR) {
+			my_putstr("i'm here\n");
 			return (run_command(my_strdup(command[0]), command, param));
 		}
 	}
 
 	my_putstr("Error: unknown command '");
 	my_putstr(command[0]);
-	my_putstr("'.");
+	my_putstr("'.\n");
 
 	return (0);
 }
