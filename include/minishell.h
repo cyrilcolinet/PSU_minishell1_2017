@@ -9,41 +9,40 @@
 # define MINISHELL_H
 
 # include <stdbool.h>
-# include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <signal.h>
-# include <sys/errno.h>
+# include <dirent.h> 
+
 # include <sys/types.h>
-# include <sys/stat.h>
+# include <sys/stat.h> 
 # include <sys/wait.h>
 
 typedef struct stat stat_t;
+typedef int (*pCom)(char *, char *);
 
-typedef struct params {
-		char 	**env;
-		int 	env_size;
-		char 	**env_copy;
-		char 	**arg;
-		char	buff[4067];
-		pid_t 	pid;
-		int 	fdesc;
-		char 	*strcat;
-		int 	status;
-} param_t;
+typedef struct commands {
+		char	*command;
+		pCom 	fct;
+}		com_t;
 
-int 	minishell(char **env);
+typedef struct parameters {
+		char	**env;
+		char 	**builtin;
+		com_t	*com;
+} 		param_t;
 
-void 	control_c(void);
-void 	pid_management(param_t *param, int pid);
+void 	exit_minishell(param_t *param);
+int 	minishell(int ac, char **av, char **env);
 
-void 	command_exit(char *buffer);
-void 	command_basics(param_t *param);
+int 	env_length(char **env);
+void 	env_configure(char **env, param_t *param);
 
-void 	correct_exit(param_t *param);
-bool 	str_equals(char *src, char *find);
-char 	**copy_env(char **env, param_t *param);
-param_t *init_struct(void);
-void 	display_cursor(void);
+void 	signal_handler(int signal);
+
+param_t *configure_params(void);
+void 	display_shell(void);
+
+int 	exit_command(char *stdin, char *command);
 
 # endif
