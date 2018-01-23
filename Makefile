@@ -59,9 +59,7 @@ lib:
 clean:
 		$(RM) $(OBJ)
 		$(RM) $(UT_OBJ)
-		$(RM) vgcore.*
-		$(RM) src/*.gc*
-		$(RM) tests/*.gc*
+		find -name '*.gc*' -delete -or -name 'vgcore.*' -delete
 
 fclean: 	clean
 		$(RM) $(NAME)

@@ -15,9 +15,17 @@ void exit_minishell(param_t *param)
 	if (param->env != NULL) {
 		while (loop < envlen) {
 			free(param->env[loop]);
+			loop++;
 		}
 
+		loop = 0;
 		free(param->env);
+	}
+
+	while (loop < 6) {
+		free(param->com->command);
+		param->com++;
+		loop++;
 	}
 
 	free(param->builtin);

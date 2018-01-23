@@ -43,7 +43,7 @@ void configure_pointer_com(param_t *param)
 
 char **configure_builtin(void)
 {
-	char **builin = malloc(sizeof(char *) * 7);
+	char **builtin = malloc(sizeof(char *) * 7);
 	int key = 0;
 
 	if (builtin == NULL)
