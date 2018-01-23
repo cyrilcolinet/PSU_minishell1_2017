@@ -10,6 +10,7 @@
 
 # include <stdbool.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
 # include <dirent.h> 
@@ -43,7 +44,7 @@ void 	signal_handler(int signal);
 param_t *configure_params(void);
 
 void 	display_shell(void);
-void 	redirect_stdin(char **stdin);
+void 	redirect_stdin(char **stdin, param_t *param);
 
 int 	exit_command(char *stdin, char *command);
 

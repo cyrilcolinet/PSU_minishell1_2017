@@ -30,7 +30,7 @@ UT_SRC 		= src/main.c 					\
 		  src/minishell.c 				\
 		  tests/minishell_tests.c
 
-CFLAGS 		= -Wall -Wextra -I./include --coverage
+CFLAGS 		= -Wall -Wextra -I./include --coverage -g3
 
 UT_CFLAGS 	= -lcriterion -lgcov --coverage
 

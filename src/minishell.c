@@ -19,7 +19,6 @@ void exit_minishell(param_t *param)
 		}
 
 		loop = 0;
-		free(param->env);
 	}
 
 	while (loop < 6) {
@@ -48,7 +47,7 @@ int minishell(int ac, char **av, char **env)
 	while (true) {
 		display_shell();
 		signal(SIGINT, signal_handler);
-		redirect_stdin(&stdin);
+		redirect_stdin(&stdin, param);
 
 		if ((result = exec_command(stdin)) == -1)
 			break;
