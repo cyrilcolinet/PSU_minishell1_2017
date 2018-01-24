@@ -27,9 +27,15 @@ SRC 		= src/main.c 					\
 		  	  src/commands/exit_command.c 	\
 		  	  src/commands/env_command.c
 
-UT_SRC 		= src/main.c 					\
-		  src/minishell.c 				\
-		  tests/minishell_tests.c
+UT_SRC 		= src/minishell.c 				\
+		  	  src/utilities.c 				\
+		  	  src/signal_handler.c 			\
+		  	  src/managers/environment.c 	\
+		  	  src/managers/commands.c 		\
+		  	  src/managers/std.c 			\
+		  	  src/commands/exit_command.c 	\
+		  	  src/commands/env_command.c 	\
+		  	  tests/minishell_tests.c
 
 CFLAGS 		= -Wall -Wextra -I./include --coverage -g3
 
@@ -37,9 +43,9 @@ UT_CFLAGS 	= -lcriterion -lgcov --coverage
 
 EXTRA_FLAGS	= -L./lib/ -lmy
 
-CC 		= gcc
+CC 			= gcc
 
-RM		= rm -f
+RM			= rm -f
 
 OBJ 		= $(SRC:.c=.o)
 
@@ -48,29 +54,29 @@ LIB_OBJ		= ./lib/my/*.o
 UT_OBJ		= $(UT_SRC:.c=.o)
 
 all: 		lib $(NAME)
-		@$(call SUCCESS, "Project successfully compiled.")
+			@$(call SUCCESS, "Project successfully compiled.")
 
 $(NAME):	$(OBJ)
-		$(CC) $(CFLAGS) $(EXTRA_FLAGS) $(OBJ) $(LIB_OBJ) -o $(NAME)
-		@$(call SUCCESS, "All objects files successfully regrouped in ./$(NAME) binary file.")
+			$(CC) $(CFLAGS) $(EXTRA_FLAGS) $(OBJ) $(LIB_OBJ) -o $(NAME)
+			@$(call SUCCESS, "All objects files successfully regrouped in ./$(NAME) binary file.")
 
 lib:
-		make -C ./lib
+			make -C ./lib
 
 clean:
-		$(RM) $(OBJ)
-		$(RM) $(UT_OBJ)
-		find -name '*.gc*' -delete -or -name 'vgcore.*' -delete
+			$(RM) $(OBJ)
+			$(RM) $(UT_OBJ)
+			find -name '*.gc*' -delete -or -name 'vgcore.*' -delete
 
 fclean: 	clean
-		$(RM) $(NAME)
-		$(RM) $(UT_NAME)
-		@$(call SUCCESS, "Project fully cleaned.")
-		make fclean -C ./lib
+			$(RM) $(NAME)
+			$(RM) $(UT_NAME)
+			@$(call SUCCESS, "Project fully cleaned.")
+			make fclean -C ./lib
 
 re: 		fclean all
 
 tests_run:	fclean $(UT_OBJ)
-		$(CC) $(CFLAGS) $(UT_CFLAGS) $(UT_OBJ) -o $(UT_NAME)
-		@$(call SUCCESS, "Unitary tests successfully compiled. Start it !")
-		./$(UT_NAME)
+			$(CC) $(CFLAGS) $(UT_CFLAGS) $(UT_OBJ) -o $(UT_NAME)
+			@$(call SUCCESS, "Unitary tests successfully compiled. Start it !")
+			./$(UT_NAME)
