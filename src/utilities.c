@@ -30,15 +30,18 @@ pCom *configure_commands(pCom **arr)
 void configure_pointer_com(param_t *param)
 {
 	pCom *func = configure_commands(&func);
+	com_t *com = param->com;
 	int key = 0;
 
-	while (param->builtin[key]) {
-		param->com->command = my_strdup(param->builtin[key]);
-		param->com->fct = *func;
+	while (param->builtin[key] != NULL) {
+		com->command = my_strdup(param->builtin[key]);
+		com->fct = *func;
 		key++;
 		func++;
-		param->com++;
+		com++;
 	}
+
+	param->com = com;
 }
 
 char **configure_builtin(void)

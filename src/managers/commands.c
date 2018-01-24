@@ -18,13 +18,25 @@ int check_command(char *command, param_t *param)
 {
 	int i = 0;
 	int res = 0;
+	com_t *com = param->com + 1;
 
-	while (my_strcmp(param->com->command, command) && i < 7) {
-		param->com++;
+	while (param->builtin[i] != NULL) {
+		if (my_strcmp(param->builtin[i], command)) {
+			res++;
+
+			if (res >= 6)
+				return (0);
+		}
+	}
+
+	i = 0, res = 0;
+
+	while (my_strcmp(com->command, command) != 0 && i < 7) {
+		com++;
 		i++;
 	}
 
-	return ((i >= 7) ? 0 : param->com->fct(command + 1, param->env));
+	return ((i >= 7) ? 0 : com->fct(command + 1, param->env));
 }
 
 int run_command(char *path, char **args, param_t *param)
