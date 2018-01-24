@@ -13,6 +13,9 @@
 # endif
 
 # include <stdbool.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 /**
 ** Check if number is negative or  positive
@@ -324,7 +327,7 @@ void my_put_nbr_base(int nbr, char *base);
 ** @param (unsigned int) size
 ** @return (char *) new_ptr
 **/
-char *my_realloc(char *ptr, unsigned int size);
+char *my_realloc(void *ptr, size_t prev_size, size_t new_size);
 
 /**
 ** Get the next line of file description

@@ -57,7 +57,7 @@ void redirect_stdin(char **stdin, param_t *param)
 
 	while ((ret = read(0, &buffer, 1)) && buffer != '\n') {
 		*(*stdin + i++) = buffer;
-		*stdin = my_realloc(*stdin, count + 1);
+		*stdin = my_realloc(*stdin, count, count + 1);
 		count++;
 	}
 
