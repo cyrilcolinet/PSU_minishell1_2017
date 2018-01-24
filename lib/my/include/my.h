@@ -344,4 +344,10 @@ char *my_getline(int fdesc);
 **/
 void my_printf(char *format, ...);
 
+/**
+** Free pointer
+** @param (void) *ptr
+**/
+void my_free(void *ptr);
+
 # endif

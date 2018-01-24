@@ -62,7 +62,8 @@ SRC 				= my_atoi.c 					\
 					  my_printf_flags_string.c 		\
 					  my_printf_flags_unsigned.c	\
 					  my_printf_utils.c 			\
-					  my_printf.c
+					  my_printf.c 					\
+					  my_free.c
 
 CFLAGS 				= -Wall -Wextra -Werror -I./include
 
