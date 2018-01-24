@@ -48,6 +48,7 @@ DEBUG 			= -g3
 ## Rules
 
 all: 			$(BUILDDIR) $(LIBMY) $(NAME)
+				@$(call SUCCESS, "Project successfully compiled.")
 
 $(BUILDDIR):
 				mkdir -p $(BUILDDIR)
@@ -55,9 +56,11 @@ $(BUILDDIR):
 
 $(BUILDDIR)%.o:	$(SRCDIR)%.c
 				$(CC) $(CFLAGS) -c -o $@ $<
+				@$(call SUCCESS, "Objct files created in $(BUILDDIR) folder")
 
 $(NAME): 		$(BUILDOBJS)
 				$(CC) $(CFLAGS) -L$(LIBDIR) -lmy -o $(NAME) $(BUILDOBJS) $(LIBDIR)/my/*.o $(LIBFT)
+				@$(call SUCCESS, "All objects files successfully regrouped in ./$(NAME) binary file.")
 
 $(LIBMY):
 				make -C $(LIBDIR)
@@ -66,6 +69,7 @@ clean:
 				rm -rf $(BUILDDIR)
 				find -name '*.gc*' -delete -or -name 'vgcore.*' -delete
 				make -C $(LIBDIR) clean
+				@$(call SUCCESS, "Project fully cleaned.")
 
 fclean: 		clean
 				rm -rf $(NAME)
