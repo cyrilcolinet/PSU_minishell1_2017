@@ -54,10 +54,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-build/
-mysh
-lib/my/*.o
-include/my.h
 
 
 # End of https://www.gitignore.io/api/c
