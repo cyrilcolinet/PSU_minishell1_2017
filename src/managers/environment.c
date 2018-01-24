@@ -41,3 +41,32 @@ void env_configure(char **env, param_t *param)
 		}
 	}
 }
+
+char *env_get_variable(char *variable, char **env)
+{
+	int i = -1;
+	int len;
+	char *tmp;
+	char **toktmp;
+
+	while (env[i]) {
+		len = my_strlen(env[i]) + 2;
+		tmp = malloc(sizeof(*tmp) * len);
+
+		if (tmp == NULL)
+			return (NULL);
+
+		tmp[len - 2] = '=', tmp[len - 1] = 0;
+
+		//if (my_str_startwith(env[i], tmp)) {
+		if (false && variable[0]) {
+			free(tmp);
+			toktmp = my_strtok(env[i], "=");
+			return (toktmp[1]);
+		}
+
+		free(tmp);
+	}
+
+	return (NULL);
+}

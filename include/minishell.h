@@ -46,6 +46,7 @@ int 	minishell(int ac, char **av, char **env);
 
 int 	env_length(char **env);
 void 	env_configure(char **env, param_t *param);
+char 	*env_get_variable(char *variable, char **env);
 
 void 	proc_signal_handler(int signal);
 void 	signal_handler(int signal);

@@ -9,5 +9,8 @@
 
 int exit_command(char *stdin, char **env)
 {
+	(void)stdin;
+	(void)env;
+
 	return (-1);
 }
