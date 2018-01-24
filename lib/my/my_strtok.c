@@ -42,5 +42,7 @@ char **my_strtok(char *str, char *delim)
 		}
 	}
 
+	ret[j] = NULL;
+
 	return (ret);
 }

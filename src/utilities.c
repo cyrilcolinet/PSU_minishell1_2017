@@ -8,58 +8,19 @@
 # include "my.h"
 # include "minishell.h"
 
-pCom *configure_commands(pCom **arr)
+void my_free_array(char **arr)
 {
-	*arr = (pCom*)malloc(sizeof(pCom) * 6);
+	int i = 0;
 
-	if (*arr == NULL) {
-		write(2, "Malloc failed. Aborded.\n", 24);
-		return (NULL);
+	if (arr == NULL)
+		return;
+
+	while (arr[i]) {
+		free(arr[i]);
 	}
 
-	(*arr)[0] = exit_command;
-	(*arr)[1] = exit_command;
-	(*arr)[2] = exit_command;
-	(*arr)[3] = exit_command;
-	(*arr)[4] = exit_command;
-	(*arr)[5] = env_command;
-
-	return (*arr);
-}
-
-void configure_pointer_com(param_t *param)
-{
-	pCom *func = configure_commands(&func);
-	com_t *com = param->com;
-	int key = 0;
-
-	while (param->builtin[key] != NULL) {
-		com->command = my_strdup(param->builtin[key]);
-		com->fct = *func;
-		key++;
-		func++;
-		com++;
-	}
-
-	param->com = com;
-}
-
-char **configure_builtin(void)
-{
-	char **builtin = malloc(sizeof(char *) * 7);
-
-	if (builtin == NULL)
-		return (NULL);
-
-	builtin[0] = "exit";
-	builtin[1] = "echo";
-	builtin[2] = "cd";
-	builtin[3] = "setenv";
-	builtin[4] = "unsetenv";
-	builtin[5] = "env";
-	builtin[6] = NULL;
-
-	return (builtin);
+	free(arr);
+	arr = NULL;
 }
 
 param_t *configure_params(void)
@@ -72,13 +33,6 @@ param_t *configure_params(void)
 	}
 
 	param->env = NULL;
-	param->com = malloc(sizeof(com_t) * 6);
-	param->builtin = configure_builtin();
-
-	if (param->com == NULL || param->builtin == NULL)
-		return (NULL);
-
-	configure_pointer_com(param);
 
 	return (param);
 }

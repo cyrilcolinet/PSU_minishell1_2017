@@ -8,14 +8,17 @@
 # include "my.h"
 # include "minishell.h"
 
-int env_command(char *stdin, char **env)
+int env_command(char *stdin, param_t *param)
 {
-	int i = -1;
+	int i = 0;
 
-	while (env[i]) {
-		my_printf("%s\n", env[i]);
+	while (param->env[i]) {
+		my_putstr(param->env[i]);
+		my_putstr("\n");
 		i++;
 	}
 
-	return (0);
+	my_putstr("\n");
+
+	return (1);
 }

@@ -9,26 +9,7 @@
 
 void exit_minishell(param_t *param)
 {
-	int loop = 0;
-	int envlen = env_length(param->env);
-
-	if (param->env != NULL) {
-		while (loop < envlen) {
-			free(param->env[loop]);
-			loop++;
-		}
-
-		loop = 0;
-	}
-
-	while (loop < 6) {
-		free(param->com->command);
-		param->com++;
-		loop++;
-	}
-
-	free(param->builtin);
-	free(param->com);
+	my_free_array(param->env);
 	free(param);
 	write(1, "\n", 1);
 	exit(0);
@@ -38,16 +19,15 @@ int minishell(int ac, char **av, char **env)
 {
 	param_t *param = configure_params();
 	char *stdin = NULL;
-	int result;
+	int result = 0;
+	(void)ac, (void)av;
 
 	if (param == NULL)
 		return (84);
 
-	(void)ac;
-	(void)av;
 	env_configure(env, param);
 
-	while (true) {
+	while (result != -1) {
 		display_shell();
 		signal(SIGINT, signal_handler);
 		redirect_stdin(&stdin, param);
@@ -57,8 +37,8 @@ int minishell(int ac, char **av, char **env)
 			continue;
 		}
 
-		if ((result = exec_command(&stdin, param)) == -1)
-			break;
+		result = exec_command(&stdin, param);
+		free(stdin);
 	}
 
 	exit_minishell(param);

@@ -7,10 +7,8 @@
 
 # include "minishell.h"
 
-int exit_command(char *stdin, char **env)
+int exit_command(char *stdin, param_t *param)
 {
-	(void)stdin;
-	(void)env;
-
+	(void)stdin, (void)param;
 	return (-1);
 }

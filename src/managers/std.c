@@ -62,9 +62,8 @@ void redirect_stdin(char **stdin, param_t *param)
 	}
 
 	*(*stdin + i) = 0;
-	printf("%d\n", ret);
 
-	if (ret == 1) {
+	if (ret == 0) {
 		free(*stdin);
 		exit_minishell(param);
 	}
