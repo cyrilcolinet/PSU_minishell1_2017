@@ -26,17 +26,17 @@ int env_command(char **command, param_t *param)
 
 int setenv_command(char **command, param_t *param)
 {
-	char **args = my_strtok(command[0], ' ');
+	int count = 0;
 
-	if (!args[0]) {
-		if (args != NULL)
-			my_free_array(args);
-
+	if (!command[1]) {
 		return (env_command(command, param));
 	}
 
-	if (args[1] && args[2]) {
-		my_putstr("Error: Too many arguments (setenv).\n");
+	while (command[count])
+		count++;
+
+	if (count != 3) {
+		my_putstr("Error: Too much or less arguments (setenv).\n");
 		return (1);
 	}
 

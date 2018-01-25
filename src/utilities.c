@@ -138,6 +138,7 @@ void my_free_array(char **arr)
 
 	while (arr[i]) {
 		free(arr[i]);
+		i++;
 	}
 
 	free(arr);
@@ -154,6 +155,7 @@ param_t *configure_params(void)
 	}
 
 	param->env = NULL;
+	param->environment = NULL;
 	param->exit_sts = 0;
 
 	return (param);

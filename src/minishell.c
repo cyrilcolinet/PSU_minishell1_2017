@@ -10,7 +10,7 @@
 
 void exit_minishell(param_t *param)
 {
-	//my_free_array(param->env);
+	my_free_array(param->env);
 	free(param);
 	write(1, "\n", 1);
 }
@@ -19,7 +19,7 @@ int minishell(int ac, char **av, char **env)
 {
 	param_t *param = configure_params();
 	char *stdin = NULL;
-	int result = 0;
+	int result = 0, exit_sts;
 	(void)ac, (void)av;
 
 	if (param == NULL)
@@ -41,7 +41,7 @@ int minishell(int ac, char **av, char **env)
 		free(stdin);
 	}
 
-	printf("exit = %d\n", param->exit_sts);
+	exit_sts = param->exit_sts;
 	exit_minishell(param);
-	return (param->exit_sts);
+	return (exit_sts);
 }

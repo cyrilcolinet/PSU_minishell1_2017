@@ -65,6 +65,9 @@ int check_command(char **command, param_t *param)
 		ret = setenv_command(command, param);
 	}
 
+	if (ret != 0)
+		my_free_array(command);
+
 	return (ret);
 }
 
@@ -78,7 +81,7 @@ int run_command(char *path, char **args, param_t *param)
 		execve(path, args, param->env);
 	} else if (pid < 0) {
 		free(path);
-		//my_free_array(arr);
+		my_free_array(args);
 		write(2, "Fork failed to create a new process.\n", 38);
 		return (-1);
 	}
@@ -88,8 +91,7 @@ int run_command(char *path, char **args, param_t *param)
 	if (path != NULL)
 		free(path);
 
-	//my_free_array(arr);
-	//my_free_array(args);
+	my_free_array(args);
 	my_putstr("\n");
 
 	return (1);
@@ -100,7 +102,7 @@ int exec_command(char **command, param_t *param)
 	stat_t info;
 	int own = check_command(command, param);
 
-	if (own == 1 /*|| check_binaries(command, param)*/)
+	if (own == 1 || check_binaries(command, param))
 		return (0);
 	if (own < 0)
 		return (-1);
@@ -115,6 +117,9 @@ int exec_command(char **command, param_t *param)
 		}
 	}
 
-	my_printf("Error: unknown command '%s'.\n\n", command[0]);
+	my_putstr("Error: unknown command '");
+	my_putstr(command[0]);
+	my_putstr("\n");
+	my_free_array(command);
 	return (0);
 }
