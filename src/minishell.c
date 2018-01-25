@@ -9,7 +9,7 @@
 
 void exit_minishell(param_t *param)
 {
-	my_free_array(param->env);
+	//my_free_array(param->env);
 	free(param);
 	write(1, "\n", 1);
 	exit(0);

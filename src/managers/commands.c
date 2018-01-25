@@ -61,6 +61,8 @@ int check_command(char *command, param_t *param)
 		ret = exit_command(command, param);
 	} else if (my_strcmp(command, "env") == 0) {
 		ret = env_command(command, param);
+	} else if (my_strcmp(command, "setenv") == 0) {
+		ret = setenv_command(command, param);
 	}
 
 	return (ret);
@@ -88,6 +90,7 @@ int run_command(char *path, char **args, param_t *param)
 
 	//my_free_array(arr);
 	//my_free_array(args);
+	my_putstr("\n");
 
 	return (1);
 }
