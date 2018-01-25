@@ -44,7 +44,7 @@ void env_configure(char **env, param_t *param)
 		key++;
 	}
 
-	param->env[envlen - 1] = NULL;
+	param->env[key] = NULL;
 }
 
 char *env_get_var(char *variable, char **env)
