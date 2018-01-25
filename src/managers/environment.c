@@ -66,7 +66,7 @@ char *env_get_variable(char *variable, char **env)
 		//if (my_str_startwith(env[i], tmp)) {
 		if (false && variable[0]) {
 			free(tmp);
-			toktmp = my_strtok(env[i], "=");
+			toktmp = my_strtok(env[i], '=');
 			return (toktmp[1]);
 		}
 

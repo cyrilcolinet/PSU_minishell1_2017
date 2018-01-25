@@ -55,7 +55,7 @@ int exec_command(char **command, param_t *param)
 {
 	stat_t info;
 	int own = check_command(command[0], param);
-	command = my_strtok(command[0], " ");
+	command = my_strtok(command[0], ' ');
 
 	if (own == 1 || check_binaries(command)) {
 		my_free_array(command);

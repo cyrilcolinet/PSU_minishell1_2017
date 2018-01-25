@@ -11,8 +11,8 @@
 char *parse_shell_pwd(char *path, int reverse)
 {
 	int loop;
-	int count = my_count_delim_part(path, "/");
-	char **re = my_strtok(path, "/");
+	int count = my_countwords(path, '/');
+	char **re = my_strtok(path, '/');
 	char *new = my_strdup(re[count - 1]);
 	(void)reverse;
 

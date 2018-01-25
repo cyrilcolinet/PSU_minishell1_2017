@@ -129,7 +129,7 @@ int my_str_isalpha(char *str);
 ** @return (int) - Return the count of parts delimter by a delimier
 ** specified in argument...
 **/
-int my_count_delim_part(char *str, char *delim);
+int my_countwords(char *str, char delim);
 
 /**
 ** Check if string contains ONLY numeric characters
@@ -308,10 +308,10 @@ char **my_str_to_word_array(char *str);
 /**
 ** Cut string with delimiter given as parameter
 ** @param (char *) str
-** @param (char *) delimiter
+** @param (char) delim
 ** return (char **) - Return word array in double pointer char
 **/
-char **my_strtok(char *str, char *delimiter);
+char **my_strtok(char *str, char delim);
 
 /**
 ** Print number in defined base
@@ -349,5 +349,7 @@ void my_printf(char *format, ...);
 ** @param (void) *ptr
 **/
 void my_free(void **ptr);
+
+char *my_str_configure(unsigned int size);
 
 # endif
