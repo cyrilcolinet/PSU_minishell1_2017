@@ -47,27 +47,17 @@ void env_configure(char **env, param_t *param)
 	param->env[envlen - 1] = NULL;
 }
 
-char *env_get_variable(char *variable, char **env)
+char *env_get_var(char *variable, char **env)
 {
-	int i = -1;
-	int len;
+	int i = 0;
 	char *tmp;
-	char **toktmp;
 
 	while (env[i]) {
-		len = my_strlen(env[i]) + 2;
-		tmp = malloc(sizeof(*tmp) * len);
+		tmp = my_str_join(variable, '=');
 
-		if (tmp == NULL)
-			return (NULL);
-
-		tmp[len - 2] = '=', tmp[len - 1] = 0;
-
-		//if (my_str_startwith(env[i], tmp)) {
-		if (false && variable[0]) {
+		if (my_str_startswith(env[i], tmp)) {
 			free(tmp);
-			toktmp = my_strtok(env[i], '=');
-			return (toktmp[1]);
+			return (my_strchr(env[i], '=') + 1);
 		}
 
 		free(tmp);

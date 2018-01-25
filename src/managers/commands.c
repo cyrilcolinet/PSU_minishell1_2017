@@ -8,9 +8,45 @@
 # include "my.h"
 # include "minishell.h"
 
-int check_binaries(char **command)
+int executable(char *bin, stat_t info, char **c, param_t *p)
 {
-	(void)command;
+	if (info.st_mode & S_IXUSR) {
+		if (info.st_mode & S_IXUSR) {
+			return (run_command(bin, c, p));
+		} else {
+			my_printf("Error: permission denied for '%s'.\n", bin);
+		}
+
+		free(bin);
+		return (1);
+	}
+
+	free(bin);
+	return (0);
+}
+
+int check_binaries(char **command, param_t *param)
+{
+	int i = 0;
+	char *bin_path;
+	char **path = my_strtok(env_get_var("PATH", param->env), ':');
+	stat_t info;
+
+	while (path && path[i]) {
+		if (my_str_startswith(command[0], path[i]))
+			bin_path = my_strdup(command[0]);
+		else
+			bin_path = my_strdup(command[0]);
+
+		if (lstat(bin_path, &info) == -1) {
+			free(bin_path);
+		} else {
+			my_free_array(path);
+			return (executable(bin_path, info, command, param));
+		}
+	}
+
+	my_free_array(path);
 	return (0);
 }
 
@@ -55,20 +91,16 @@ int exec_command(char **command, param_t *param)
 {
 	stat_t info;
 	int own = check_command(command[0], param);
-	command = my_strtok(command[0], ' ');
 
-	if (own == 1 || check_binaries(command)) {
-		my_free_array(command);
+	if (own == 1 || check_binaries(command, param)) {
 		return (0);
 	} else if (own < 0) {
-		my_free_array(command);
 		return (-1);
 	}
 
 	if (lstat(command[0], &info) != -1) {
 		if (info.st_mode & S_IFDIR) {
 			//change_dir(command[0], 0);
-			my_free_array(command);
 			return (0);
 		} else if (info.st_mode & S_IXUSR) {
 			return (run_command(my_strdup(command[0]), command, param));
@@ -76,7 +108,5 @@ int exec_command(char **command, param_t *param)
 	}
 
 	my_printf("Error: unknown command '%s'.\n", command[0]);
-	my_free_array(command);
-
 	return (0);
 }
