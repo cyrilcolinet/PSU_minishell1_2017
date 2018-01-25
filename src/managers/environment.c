@@ -53,14 +53,16 @@ char *env_get_var(char *variable, char **env)
 	char *tmp;
 
 	while (env[i]) {
-		tmp = my_str_join(variable, '=');
+		tmp = my_str_joinch(variable, '=');
 
 		if (my_str_startswith(env[i], tmp)) {
+			printf("%s\n", tmp);
 			free(tmp);
 			return (my_strchr(env[i], '=') + 1);
 		}
 
 		free(tmp);
+		i++;
 	}
 
 	return (NULL);

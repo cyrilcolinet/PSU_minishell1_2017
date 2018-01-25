@@ -57,4 +57,13 @@ int 	exec_command(char **command, param_t *param);
 int 	exit_command(char *stdin, param_t *param);
 int 	env_command(char *stdin, param_t *param);
 
+
+char *my_str_join(char *str1, char *str2);
+char *my_str_joincl(char *str1, char *str2, int free_both);
+bool my_str_endswith(char *str1, char *str2);
+char *my_str_joinch(char *str, char delim);
+char *my_pathjoin(char *str1, char *str2);
+char *my_strchr(char *str, char delim);
+bool my_str_startswith(char *str1, char *str2);
+
 # endif
