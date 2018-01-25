@@ -53,15 +53,15 @@ int check_binaries(char **command, param_t *param)
 	return (0);
 }
 
-int check_command(char *command, param_t *param)
+int check_command(char **command, param_t *param)
 {
 	int ret = 0;
 
-	if (my_strcmp(command, "exit") == 0) {
+	if (my_strcmp(command[0], "exit") == 0) {
 		ret = exit_command(command, param);
-	} else if (my_strcmp(command, "env") == 0) {
+	} else if (my_strcmp(command[0], "env") == 0) {
 		ret = env_command(command, param);
-	} else if (my_strcmp(command, "setenv") == 0) {
+	} else if (my_strcmp(command[0], "setenv") == 0) {
 		ret = setenv_command(command, param);
 	}
 
@@ -98,8 +98,7 @@ int run_command(char *path, char **args, param_t *param)
 int exec_command(char **command, param_t *param)
 {
 	stat_t info;
-	int own = check_command(command[0], param);
-	command = my_strtok(command[0], ' ');
+	int own = check_command(command, param);
 
 	if (own == 1 /*|| check_binaries(command, param)*/)
 		return (0);

@@ -8,9 +8,10 @@
 # include "my.h"
 # include "minishell.h"
 
-int env_command(char *stdin, param_t *param)
+int env_command(char **command, param_t *param)
 {
 	int i = 0;
+	(void)command;
 
 	while (param->env[i]) {
 		my_putstr(param->env[i]);
@@ -23,17 +24,15 @@ int env_command(char *stdin, param_t *param)
 	return (1);
 }
 
-int setenv_command(char *stdin, param_t *param)
+int setenv_command(char **command, param_t *param)
 {
-	char **args = my_strtok(stdin, ' ');
-
-	printf("bbbb\n");
+	char **args = my_strtok(command[0], ' ');
 
 	if (!args[0]) {
 		if (args != NULL)
 			my_free_array(args);
 
-		return (env_command(stdin, param));
+		return (env_command(command, param));
 	}
 
 	if (args[1] && args[2]) {

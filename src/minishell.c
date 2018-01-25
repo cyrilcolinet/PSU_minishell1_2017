@@ -5,6 +5,7 @@
 ** Minishell functions
 */
 
+# include "my.h"
 # include "minishell.h"
 
 void exit_minishell(param_t *param)
@@ -12,7 +13,6 @@ void exit_minishell(param_t *param)
 	//my_free_array(param->env);
 	free(param);
 	write(1, "\n", 1);
-	exit(0);
 }
 
 int minishell(int ac, char **av, char **env)
@@ -37,10 +37,11 @@ int minishell(int ac, char **av, char **env)
 			continue;
 		}
 
-		result = exec_command(&stdin, param);
+		result = exec_command(my_strtok(stdin, ' '), param);
 		free(stdin);
 	}
 
+	printf("exit = %d\n", param->exit_sts);
 	exit_minishell(param);
-	return (0);
+	return (param->exit_sts);
 }

@@ -51,13 +51,13 @@ void 	display_shell(void);
 void 	redirect_stdin(char **stdin, param_t *param);
 
 int		check_libraries(char **command);
-int 	check_command(char *command, param_t *param);
+int 	check_command(char **command, param_t *param);
 int 	run_command(char *path, char **args, param_t *param);
 int 	exec_command(char **command, param_t *param);
 
-int 	exit_command(char *stdin, param_t *param);
-int 	env_command(char *stdin, param_t *param);
-int 	setenv_command(char *stdin, param_t *param);
+int 	exit_command(char **command, param_t *param);
+int 	env_command(char **command, param_t *param);
+int 	setenv_command(char **command, param_t *param);
 
 
 char *my_str_join(char *str1, char *str2);

@@ -154,6 +154,7 @@ param_t *configure_params(void)
 	}
 
 	param->env = NULL;
+	param->exit_sts = 0;
 
 	return (param);
 }
