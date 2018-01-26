@@ -80,4 +80,4 @@ fclean: 		clean
 re: 			fclean all
 
 # Just in case those files exist in the root dir
-.PHONY			: all fclean clean re
+.PHONY			: all fclean clean re lib

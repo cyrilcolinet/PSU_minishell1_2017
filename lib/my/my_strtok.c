@@ -33,7 +33,7 @@ static char **transform(char *str, int wcount,
 
 	while (i < wcount) {
 		k = 0, wlen = get_wlen(&str[j], delim);
-		new[i] = my_str_configure(wlen + 1);
+		new[i] = my_strconfigure(wlen + 1);
 		if (new[i] == NULL)
 			new[i] = NULL;
 		while (str[j] == delim)
