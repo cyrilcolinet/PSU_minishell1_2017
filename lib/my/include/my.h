@@ -351,6 +351,20 @@ void my_printf(char *format, ...);
 **/
 void my_free(void **ptr);
 
-char *my_str_configure(unsigned int size);
+char *my_strconfigure(unsigned int size);
+
+char *my_strjoin(char *str1, char *str2);
+
+char *my_str_joincl(char *str1, char *str2, int free_both);
+
+char *my_strjoin_char(char *str, char delim);
+
+bool my_strstartswith(char *str1, char *str2);
+
+bool my_strendswith(char *str1, char *str2);
+
+char *my_strchr(char *str, char delim);
+
+void my_freetab(char **arr);
 
 # endif

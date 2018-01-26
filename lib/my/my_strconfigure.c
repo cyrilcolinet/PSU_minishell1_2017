@@ -5,14 +5,20 @@
 ** my_str_configure function
 */
 
+# include <stdlib.h>
 # include "my.h"
 
-char *my_str_configure(unsigned int size)
+char *my_strconfigure(unsigned int size)
 {
-	char *ptr = malloc(sizeof(char) * (size + 1));
+	char *ptr;
 	unsigned int i = 0;
 
-	if (ptr == NULL || !size)
+	if (!size)
+		return (NULL);
+
+	ptr = malloc(sizeof(char) * (size + 1));
+
+	if (ptr == NULL)
 		return (NULL);
 
 	while (i < size + 1)
