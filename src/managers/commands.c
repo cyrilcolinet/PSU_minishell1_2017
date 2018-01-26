@@ -32,7 +32,7 @@ int check_binaries(char **command, param_t *param)
 	stat_t info;
 
 	while (param->path && param->path[i]) {
-		if (my_str_startswith(command[0], param->path[i]))
+		if (my_strstartswith(command[0], param->path[i]))
 			bin_path = my_strdup(command[0]);
 		else
 			bin_path = my_pathjoin(param->path[i], command[0]);
@@ -40,7 +40,6 @@ int check_binaries(char **command, param_t *param)
 		if (lstat(bin_path, &info) == -1) {
 			free(bin_path);
 		} else {
-			my_free_array(param->path);
 			return (executable(bin_path, info, command, param));
 		}
 		i++;
@@ -64,7 +63,7 @@ int check_command(char **command, param_t *param)
 	}
 
 	if (ret != 0)
-		my_free_array(command);
+		my_freetab(command);
 
 	return (ret);
 }
@@ -79,7 +78,7 @@ int run_command(char *path, char **args, param_t *param)
 		execve(path, args, param->env);
 	} else if (pid < 0) {
 		free(path);
-		my_free_array(args);
+		my_freetab(args);
 		write(2, "Fork failed to create a new process.\n", 38);
 		return (-1);
 	}
@@ -89,7 +88,7 @@ int run_command(char *path, char **args, param_t *param)
 	if (path != NULL)
 		free(path);
 
-	my_free_array(args);
+	my_freetab(args);
 	my_putstr("\n");
 
 	return (1);
@@ -108,7 +107,7 @@ int exec_command(char **command, param_t *param)
 	if (lstat(command[0], &info) != -1) {
 		if (info.st_mode & S_IFDIR) {
 			//change_dir(command[0], 0);
-			my_free_array(command);
+			my_freetab(command);
 			return (0);
 		} else if (info.st_mode & S_IXUSR) {
 			return (run_command(my_strdup(command[0]), command, param));
@@ -118,6 +117,6 @@ int exec_command(char **command, param_t *param)
 	my_putstr("Error: unknown command '");
 	my_putstr(command[0]);
 	my_putstr("'.\n");
-	my_free_array(command);
+	my_freetab(command);
 	return (0);
 }

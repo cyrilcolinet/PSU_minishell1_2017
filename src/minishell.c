@@ -10,8 +10,8 @@
 
 void exit_minishell(param_t *param)
 {
-	my_free_array(param->path);
-	my_free_array(param->env);
+	my_freetab(param->path);
+	my_freetab(param->env);
 	free(param);
 	write(1, "\n", 1);
 }

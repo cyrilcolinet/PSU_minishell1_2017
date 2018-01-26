@@ -8,7 +8,7 @@
 # include <stdbool.h>
 # include "my.h"
 
-bool my_str_endswith(char *str1, char *str2)
+bool my_strendswith(char *str1, char *str2)
 {
 	int i = 0;
 

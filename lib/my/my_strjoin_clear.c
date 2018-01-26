@@ -8,7 +8,7 @@
 # include <stdlib.h>
 # include "my.h"
 
-char *my_str_joincl(char *str1, char *str2, int free_both)
+char *my_strjoin_clear(char *str1, char *str2, int free_both)
 {
 	char *new = my_strjoin(str1, str2);
 
