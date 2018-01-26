@@ -59,6 +59,7 @@ int 	exec_command(char **command, param_t *param);
 int 	exit_command(char **command, param_t *param);
 int 	env_command(char **command, param_t *param);
 int 	setenv_command(char **command, param_t *param);
+int 	cd_command(char **command, param_t *param);
 
 
 char *my_str_join(char *str1, char *str2);

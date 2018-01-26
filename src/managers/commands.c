@@ -59,6 +59,8 @@ int check_command(char **command, param_t *param)
 		ret = env_command(command, param);
 	} else if (my_strcmp(command[0], "setenv") == 0) {
 		ret = setenv_command(command, param);
+	} else if (my_strcmp(command[0], "cd") == 0) {
+		ret = cd_command(command, param);
 	}
 
 	if (ret != 0)
