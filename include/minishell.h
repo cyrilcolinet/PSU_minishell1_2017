@@ -57,8 +57,12 @@ int 	run_command(char *path, char **args, param_t *param);
 int 	exec_command(char **command, param_t *param);
 
 int 	exit_command(char **command, param_t *param);
+
 int 	env_command(char **command, param_t *param);
 int 	setenv_command(char **command, param_t *param);
+
+void 	change_directory(char *path);
+int 	check_cd_args(char **command);
 int 	cd_command(char **command, param_t *param);
 
 
