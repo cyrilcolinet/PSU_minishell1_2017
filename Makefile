@@ -55,7 +55,7 @@ all: 			$(BUILDDIR) $(LIBMY) $(NAME)
 
 $(BUILDDIR):
 				mkdir -p $(BUILDDIR)
-				$(foreach subdir, $(BUILDSUBDIR), mkdir -p build/$(subdir))
+				$(foreach subdir, $(BUILDSUBDIR), $(shell mkdir -p build/$(subdir)))
 
 $(BUILDDIR)%.o:	$(SRCDIR)%.c
 				$(CC) $(CFLAGS)   -c -o $@ $<
