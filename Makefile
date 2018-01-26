@@ -7,76 +7,77 @@
 
 ## Color variables
 
-SUCCESS		= /bin/echo -e "\x1b[1m\x1b[33m\#\#\x1b[32m $1\x1b[0m"
+SUCCESS			= /bin/echo -e "\x1b[1m\x1b[33m\#\#\x1b[32m $1\x1b[0m"
 
 ## Compilation variables
 
-.PHONY		: all, fclean, clean, re, tests_run, lib
+NAME 			= mysh
 
-NAME 		= mysh
+SRCDIR 			= ./src/
 
-UT_NAME 	= units
+SRCNAMES 		= main.c 					\
+		  	  	  minishell.c 				\
+		  	  	  utilities.c 				\
+		  	  	  signal_handler.c 			\
+		  	  	  managers/environment.c 	\
+		  	      managers/commands.c 		\
+		  	  	  managers/std.c 			\
+		  	  	  commands/exit_command.c 	\
+		  	  	  commands/env_command.c 	\
+		  	  	  commands/cd_command.c
 
-SRC 		= src/main.c 					\
-		  	  src/minishell.c 				\
-		  	  src/utilities.c 				\
-		  	  src/signal_handler.c 			\
-		  	  src/managers/environment.c 	\
-		  	  src/managers/commands.c 		\
-		  	  src/managers/std.c 			\
-		  	  src/commands/exit_command.c 	\
-		  	  src/commands/env_command.c
+SRC 			= $(addprefix $(SRCDIR), $(SRCNAMES))
 
-UT_SRC 		= src/minishell.c 				\
-		  	  src/utilities.c 				\
-		  	  src/signal_handler.c 			\
-		  	  src/managers/environment.c 	\
-		  	  src/managers/commands.c 		\
-		  	  src/managers/std.c 			\
-		  	  src/commands/exit_command.c 	\
-		  	  src/commands/env_command.c 	\
-		  	  tests/minishell_tests.c
+INC 			= ./include
 
-CFLAGS 		= -Wall -Wextra -I./include --coverage -g3
+BUILDDIR 		= ./build/
 
-UT_CFLAGS 	= -lcriterion -lgcov --coverage
+BUILDSUBDIR 	= $(shell cd $(SRCDIR) && find . -mindepth 1 -type d -printf '%p\n')
 
-EXTRA_FLAGS	= -L./lib/ -lmy
+BUILDOBJS 		= $(addprefix $(BUILDDIR), $(SRCNAMES:.c=.o))
 
-CC 			= gcc
+LIBDIR 			= ./lib/
 
-RM			= rm -f
+LIBMY 			= ./lib/libmy.a
 
-OBJ 		= $(SRC:.c=.o)
+CC 				= gcc
 
-LIB_OBJ		= ./lib/my/*.o
+CFLAGS 			= -Wall -Wextra --coverage -I$(INC)
 
-UT_OBJ		= $(UT_SRC:.c=.o)
+DEBUG 			= -g3
 
-all: 		lib $(NAME)
-			@$(call SUCCESS, "Project successfully compiled.")
+OBJ 			= $($SRC:.c=.o)
 
-$(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) $(EXTRA_FLAGS) $(OBJ) $(LIB_OBJ) -o $(NAME)
-			@$(call SUCCESS, "All objects files successfully regrouped in ./$(NAME) binary file.")
+## Rules
 
-lib:
-			make -C ./lib
+all: 			$(BUILDDIR) $(LIBMY) $(NAME)
+				@$(call SUCCESS, "Project successfully compiled.")
+
+$(BUILDDIR):
+				mkdir -p $(BUILDDIR)
+				$(foreach subdir, $(BUILDSUBDIR), mkdir -p build/$(subdir))
+
+$(BUILDDIR)%.o:	$(SRCDIR)%.c
+				$(CC) $(CFLAGS)   -c -o $@ $<
+
+$(NAME): 		$(BUILDOBJS)
+				$(CC) $(CFLAGS) -L$(LIBDIR) -lmy -o $(NAME) $(BUILDOBJS) $(LIBDIR)/my/*.o $(LIBFT)
+				@$(call SUCCESS, "All objects files successfully regrouped in ./$(NAME) binary file.")
+
+$(LIBMY):
+				make -C $(LIBDIR)
 
 clean:
-			$(RM) $(OBJ)
-			$(RM) $(UT_OBJ)
-			find -name '*.gc*' -delete -or -name 'vgcore.*' -delete
+				rm -rf $(BUILDDIR)
+				find -name '*.gc*' -delete -or -name 'vgcore.*' -delete
+				make -C $(LIBDIR) clean
+				@$(call SUCCESS, "Project fully cleaned.")
 
-fclean: 	clean
-			$(RM) $(NAME)
-			$(RM) $(UT_NAME)
-			@$(call SUCCESS, "Project fully cleaned.")
-			make fclean -C ./lib
+fclean: 		clean
+				rm -rf $(NAME)
+				make -C $(LIBDIR) fclean
 
-re: 		fclean all
+re: 			fclean all
 
-tests_run:	fclean $(UT_OBJ)
-			$(CC) $(CFLAGS) $(UT_CFLAGS) $(UT_OBJ) -o $(UT_NAME)
-			@$(call SUCCESS, "Unitary tests successfully compiled. Start it !")
-			./$(UT_NAME)
+# Just in case those files exist in the root dir
+.PHONY			: all fclean clean re

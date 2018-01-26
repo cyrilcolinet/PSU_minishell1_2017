@@ -66,7 +66,7 @@ SRC 				= my_atoi.c 					\
 					  my_free.c 					\
 					  my_str_configure.c
 
-CFLAGS 				= -Wall -Wextra -Werror -I./include
+CFLAGS 				= -Wall -Wextra -I./include
 
 CC					= gcc
 
