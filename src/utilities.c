@@ -13,8 +13,10 @@ char *my_str_join(char *str1, char *str2)
 	char *new;
 	size_t i = 0, j = 0, str1len = 0, str2len = 0;
 
-	if (str1 == NULL || str2 == NULL)
+	if (str1 == NULL)
 		return (NULL);
+	if (str2 == NULL)
+		return (my_strdup(str1));
 
 	str1len = my_strlen(str1);
 	str2len = my_strlen(str2);
@@ -95,6 +97,7 @@ char *my_pathjoin(char *str1, char *str2)
 			return (my_str_join(str1, str2));
 		} else {
 			tmp2 = my_str_joincl(my_str_joinch(str1, '/'), str2, 0);
+			printf("tmp2 = %s\n", tmp2);
 			return (tmp2);
 		}
 	}
@@ -120,7 +123,7 @@ bool my_str_startswith(char *str1, char *str2)
 {
 	int i = 0;
 
-	while (str1[i]) {
+	while (str2[i]) {
 		if (str1[i] != str2[i])
 			return (false);
 		i++;
@@ -157,6 +160,7 @@ param_t *configure_params(void)
 	param->env = NULL;
 	param->environment = NULL;
 	param->exit_sts = 0;
+	param->path = NULL;
 
 	return (param);
 }

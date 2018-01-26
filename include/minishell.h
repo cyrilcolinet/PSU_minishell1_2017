@@ -30,6 +30,7 @@ typedef struct environment {
 
 typedef struct parameters {
 		char	**env;
+		char **path;
 		env_t 	*environment;
 		int 	exit_sts;
 } 		param_t;

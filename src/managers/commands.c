@@ -29,27 +29,23 @@ int check_binaries(char **command, param_t *param)
 {
 	int i = 0;
 	char *bin_path;
-	char **path = my_strtok(env_get_var("PATH", param->env), ':');
 	stat_t info;
 
-	while (path && path[i]) {
-		if (my_str_startswith(command[0], path[i]))
+	while (param->path && param->path[i]) {
+		if (my_str_startswith(command[0], param->path[i]))
 			bin_path = my_strdup(command[0]);
 		else
-			bin_path = my_pathjoin(path[i], command[0]);
-
-		printf("bin_path = %s\n", bin_path);
+			bin_path = my_pathjoin(param->path[i], command[0]);
 
 		if (lstat(bin_path, &info) == -1) {
 			free(bin_path);
 		} else {
-			my_free_array(path);
+			my_free_array(param->path);
 			return (executable(bin_path, info, command, param));
 		}
 		i++;
 	}
 
-	my_free_array(path);
 	return (0);
 }
 
@@ -102,7 +98,7 @@ int exec_command(char **command, param_t *param)
 	stat_t info;
 	int own = check_command(command, param);
 
-	if (own == 1 || check_binaries(command, param))
+	if (own == 1 /*|| check_binaries(command, param)*/)
 		return (0);
 	if (own < 0)
 		return (-1);
@@ -119,7 +115,7 @@ int exec_command(char **command, param_t *param)
 
 	my_putstr("Error: unknown command '");
 	my_putstr(command[0]);
-	my_putstr("\n");
+	my_putstr("'.\n");
 	my_free_array(command);
 	return (0);
 }

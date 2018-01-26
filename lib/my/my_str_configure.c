@@ -10,11 +10,13 @@
 char *my_str_configure(unsigned int size)
 {
 	char *ptr = malloc(sizeof(char) * (size + 1));
+	unsigned int i = 0;
 
-	if (ptr == NULL)
+	if (ptr == NULL || !size)
 		return (NULL);
 
-	*ptr = 0;
+	while (i < size + 1)
+		*(ptr + i++) = 0;
 
 	return (ptr);
 }

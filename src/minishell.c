@@ -10,6 +10,7 @@
 
 void exit_minishell(param_t *param)
 {
+	my_free_array(param->path);
 	my_free_array(param->env);
 	free(param);
 	write(1, "\n", 1);
@@ -18,7 +19,7 @@ void exit_minishell(param_t *param)
 int minishell(int ac, char **av, char **env)
 {
 	param_t *param = configure_params();
-	char *stdin = NULL;
+	char *stdin = NULL, *tmp;
 	int result = 0, exit_sts;
 	(void)ac, (void)av;
 
@@ -26,6 +27,8 @@ int minishell(int ac, char **av, char **env)
 		return (84);
 
 	env_configure(env, param);
+	tmp = env_get_var("PATH", param->env);
+	param->path = my_strtok(tmp, ':');
 
 	while (result != -1) {
 		display_shell();
