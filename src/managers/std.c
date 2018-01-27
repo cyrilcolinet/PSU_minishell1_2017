@@ -10,16 +10,20 @@
 
 char *parse_shell_pwd(char *path, int reverse)
 {
-	int loop;
 	int count = my_countwords(path, '/');
 	char **re = my_strtok(path, '/');
-	char *new = my_strdup(re[count - 1]);
+	char *new;
 	(void)reverse;
 
-	for (loop = 0; loop < count; loop++)
-		free(re[loop]);
+	if (count <= 0) {
+		new = my_strconfigure(2);
+		new[0] = '/';
+	} else {
+		new = my_strdup(re[count - 1]);
+	}
 
-	free(re);
+	if (re != NULL)
+		my_freetab(re);
 
 	return (new);
 }

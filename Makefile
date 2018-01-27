@@ -42,9 +42,9 @@ LIBMY 			= ./lib/libmy.a
 
 CC 				= gcc
 
-CFLAGS 			= -Wall -Wextra --coverage -I$(INC)
-
 DEBUG 			= -g3
+
+CFLAGS 			= -Wall -Wextra --coverage -I$(INC) $(DEBUG)
 
 OBJ 			= $($SRC:.c=.o)
 
@@ -52,6 +52,7 @@ OBJ 			= $($SRC:.c=.o)
 
 all: 			$(BUILDDIR) $(LIBMY) $(NAME)
 				@$(call SUCCESS, "Project successfully compiled.")
+				@clear
 
 $(BUILDDIR):
 				mkdir -p $(BUILDDIR)

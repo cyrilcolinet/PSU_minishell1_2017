@@ -10,8 +10,8 @@
 
 void change_directory(char *path)
 {
-	char buff[4097];
-	char *cwd = getcwd(buff, 4096);
+	//char buff[4097];
+	//char *cwd = getcwd(buff, 4096);
 	char *ret;
 
 	if (chdir(path)) {
@@ -34,6 +34,22 @@ void change_directory(char *path)
 
 int check_cd_args(char **command)
 {
+	//char *cwd;
+	//char buff[4097];
+	//char *tmp;
+
+	if (command[1]) {
+		if (command[2]) {
+			my_putstr("Error: Too many arguments.\n");
+			return (1);
+		}
+
+		//cwd = getcwd(buff, 4096);
+
+		change_directory(command[1]);
+		return (1);
+	}
+
 	return (0);
 }
 
