@@ -66,3 +66,9 @@ char *env_get_var(char *variable, char **env)
 
 	return (NULL);
 }
+
+void env_set_var(char *key, char *value)
+{
+
+	return;
+}
