@@ -28,7 +28,7 @@ char *my_pathjoin(char *str1, char *str2)
 	return (my_strjoin(str1, (*str2 == '/') ? str2 + 1 : str2));
 }
 
-param_t *configure_params(void)
+param_t *configure_params(int fd)
 {
 	param_t *param = malloc(sizeof(*param));
 
@@ -41,6 +41,7 @@ param_t *configure_params(void)
 	param->environment = NULL;
 	param->exit_sts = 0;
 	param->path = NULL;
+	param->fdesc = fd;
 
 	return (param);
 }

@@ -5,80 +5,128 @@
 ## Makefile with build project rule and units tests
 ##
 
-## Color variables
+## Global variables
 
-SUCCESS			= /bin/echo -e "\x1b[1m\x1b[33m\#\#\x1b[32m $1\x1b[0m"
+SUCCESS						= /bin/echo -e "\x1b[1m\x1b[33m\#\#\x1b[32m $1\x1b[0m"
+
+INFO						= /bin/echo -e "\x1b[1m\x1b[33m\#\#\x1b[34m $1\x1b[0m"
+
+HOST						= $(shell printenv HOME)
+
+DEBUG 						= $(if $(filter /home/cyrilcolinet, $(HOST)), -g3, )
+
+COMPILE_LIBRARY 			= $(shell [ -e $(LIBDIR) ] && echo -e "ok" || echo -e "no")
 
 ## Compilation variables
 
-NAME 			= mysh
+NAME 						= mysh
 
-SRCDIR 			= ./src/
+UNIT 						= units
 
-SRCNAMES 		= main.c 					\
-		  	  	  minishell.c 				\
-		  	  	  utilities.c 				\
-		  	  	  signal_handler.c 			\
-		  	  	  managers/environment.c 	\
-		  	      managers/commands.c 		\
-		  	  	  managers/std.c 			\
-		  	  	  commands/exit_command.c 	\
-		  	  	  commands/env_command.c 	\
-		  	  	  commands/cd_command.c
+SRCDIR 						= src/
 
-SRC 			= $(addprefix $(SRCDIR), $(SRCNAMES))
+TESTSDIR 					= tests/
 
-INC 			= ./include
+SRCNAMES 					= main.c 					\
+		  	  				  minishell.c 				\
+		  	  				  utilities.c 				\
+		  	  				  signal_handler.c 			\
+		  	  				  managers/environment.c 	\
+		  	    			  managers/commands.c 		\
+		  	  				  managers/std.c 			\
+		  	  				  commands/exit_command.c 	\
+		  	  				  commands/env_command.c 	\
+		  	  				  commands/cd_command.c
 
-BUILDDIR 		= ./build/
+SRC 						= $(addprefix $(SRCDIR), $(SRCNAMES))
 
-BUILDSUBDIR 	= $(shell cd $(SRCDIR) && find . -mindepth 1 -type d -printf '%p\n')
+SRCTESTS					= $(filter-out src/main.c, $(SRC)) 	\
+							  tests/minishell_tests.c
 
-BUILDOBJS 		= $(addprefix $(BUILDDIR), $(SRCNAMES:.c=.o))
+INC 						= include
 
-LIBDIR 			= ./lib/
+BUILDDIR 					= build/
 
-LIBMY 			= ./lib/libmy.a
+BUILDTESTDIR 				= build_tests/
 
-CC 				= gcc
+BUILDSUBDIR 				= $(shell find $(SRCDIR) -mindepth 1 -type d -printf '%p\n' | sed -e 's/^src\///')
 
-DEBUG 			= -g3
+BUILDTESTSUBDIR 			= $(shell find $(SRCDIR) -mindepth 1 -type d -printf '%p\n' | sed -e 's/^tests\///')
 
-CFLAGS 			= -Wall -Wextra --coverage -I$(INC) $(DEBUG)
+BUILDOBJS 					= $(addprefix $(BUILDDIR), $(SRCNAMES:.c=.o))
 
-OBJ 			= $($SRC:.c=.o)
+## Check
+BUILDTESTOBJS 				= $(addprefix $(BUILDTESTDIR), $(SRCTESTS:.c=.o)) 
+
+LIBDIR 						= lib/
+
+LIBMY 						= lib/libmy.a
+
+CC 							= gcc
+
+CFLAGS 						= -Wall -Wextra -I$(INC) $(DEBUG)
+
+LFLAGS		 				= $(if $(filter ok, $(COMPILE_LIBRARY)), -L$(LIBDIR) -lmy, )
+
+UNITS_LIBRARY_FLAG 			= $(LFLAGS) -lgcov -lcriterion
+
+OBJ 						= $($SRC:.c=.o)
 
 ## Rules
 
-all: 			$(BUILDDIR) $(LIBMY) $(NAME)
-				@$(call SUCCESS, "Project successfully compiled.")
-				@clear
+all: 						$(BUILDDIR) $(LIBMY) $(NAME)
+							@$(call SUCCESS, "Project successfully compiled.")
+							@clear
 
-$(BUILDDIR):
-				mkdir -p $(BUILDDIR)
-				$(foreach subdir, $(BUILDSUBDIR), $(shell mkdir -p build/$(subdir)))
-
-$(BUILDDIR)%.o:	$(SRCDIR)%.c
-				$(CC) $(CFLAGS)   -c -o $@ $<
-
-$(NAME): 		$(BUILDOBJS)
-				$(CC) $(CFLAGS) -L$(LIBDIR) -lmy -o $(NAME) $(BUILDOBJS) $(LIBDIR)/my/*.o $(LIBFT)
-				@$(call SUCCESS, "All objects files successfully regrouped in ./$(NAME) binary file.")
-
-$(LIBMY):
-				make -C $(LIBDIR)
+tests_run: 					$(BUILDTESTDIR) $(LIBMY) $(UNIT)
+							@$(call SUCCESS, "Unitary tests successfully compiled.")
+							@clear
+							@echo -e "\n"
+							@$(call SUCCESS, "Execution of criterion tests...")
+							@./$(UNIT)
+							@$(call SUCCESS, "All tests passed !")
 
 clean:
-				rm -rf $(BUILDDIR)
-				find -name '*.gc*' -delete -or -name 'vgcore.*' -delete
-				make -C $(LIBDIR) clean
-				@$(call SUCCESS, "Project fully cleaned.")
+							rm -rf $(BUILDDIR)
+							rm -rf $(BUILDTESTDIR)
+							find -name '*.gc*' -delete -or -name 'vgcore.*' -delete
+							$(if $(filter ok, $(COMPILE_LIBRARY)), make clean -C $(LIBDIR), @$(call INFO, "No lib needed for this project."))
+							@$(call SUCCESS, "Project fully cleaned.")
 
-fclean: 		clean
-				rm -rf $(NAME)
-				make -C $(LIBDIR) fclean
+fclean: 					clean
+							rm -rf $(NAME)
+							$(if $(filter ok, $(COMPILE_LIBRARY)), make fclean -C $(LIBDIR), @$(call INFO, "No lib needed for this project."))
 
-re: 			fclean all
+re: 						fclean all
+
+$(BUILDDIR):
+							mkdir -p $(BUILDDIR)
+							$(foreach subdir, $(BUILDSUBDIR), $(shell mkdir -p $(BUILDDIR)$(subdir)))
+
+$(BUILDTESTDIR):
+							mkdir -p {$(BUILDTESTDIR)src,$(BUILDTESTDIR)tests}
+							$(foreach subdir, $(BUILDSUBDIR), $(shell mkdir -p $(BUILDTESTDIR)src/$(subdir)))
+							$(foreach subdir, $(BUILDTESTSUBDIR), $(shell mkdir -p $(BUILDTESTDIR)tests/$(subdir)))
+
+$(BUILDDIR)%.o:				$(SRCDIR)%.c
+							$(CC) $(CFLAGS)   -c -o $@ $<
+
+$(BUILDTESTDIR)src/%.o:		$(SRCDIR)%.c
+							$(CC) $(CFLAGS) --coverage   -c -o $@ $<
+
+$(BUILDTESTDIR)tests/%.o:	$(TESTSDIR)%.c
+							$(CC) $(CFLAGS) --coverage   -c -o $@ $<
+
+$(NAME): 					$(BUILDOBJS)
+							$(CC) $(CFLAGS) $(LFLAGS) -o $(NAME) $(BUILDOBJS) $(LIBDIR)/my/*.o
+							@$(call SUCCESS, "All objects files successfully regrouped in ./$(NAME) binary file.")
+
+$(LIBMY):
+							$(if $(filter ok, $(COMPILE_LIBRARY)), make -C $(LIBDIR), @$(call INFO, "No lib needed for this project."))
+
+$(UNIT): 					$(BUILDTESTOBJS)
+							$(CC) $(CFLAGS) $(UNITS_LIBRARY_FLAG) -o units $(BUILDTESTOBJS) $(LIBDIR)/my/*.o
+							@$(call SUCCESS, "All tests objects files successfully regrouped in ./$(NAME) binary file.")
 
 # Just in case those files exist in the root dir
-.PHONY			: all fclean clean re lib
+.PHONY						: all fclean clean re tests_run

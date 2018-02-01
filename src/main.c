@@ -9,7 +9,7 @@
 
 int main(int ac, char **av, char **env)
 {
-	int res = minishell(ac, av, env);
+	int res = minishell(ac, av, env, 0);
 
 	return (res);
 }

@@ -16,9 +16,9 @@ void exit_minishell(param_t *param)
 	write(1, "\n", 1);
 }
 
-int minishell(int ac, char **av, char **env)
+int minishell(int ac, char **av, char **env, int fd)
 {
-	param_t *param = configure_params();
+	param_t *param = configure_params(fd);
 	char *stdin = NULL, *tmp;
 	int result = 0, exit_sts;
 	(void)ac, (void)av;

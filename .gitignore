@@ -60,5 +60,7 @@ dkms.conf
 
 # Own project files
 build/
+build_tests/
 include/my.h
 mysh
+units

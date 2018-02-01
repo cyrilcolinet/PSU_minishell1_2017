@@ -61,7 +61,7 @@ void redirect_stdin(char **stdin, param_t *param)
 
 	*stdin = str_configure(1);
 
-	while ((ret = read(0, &buffer, 1)) && buffer != '\n') {
+	while ((ret = read(param->fdesc, &buffer, 1)) && buffer != '\n') {
 		*(*stdin + i++) = buffer;
 		*stdin = my_realloc(*stdin, count, count + 1);
 		count++;
@@ -73,6 +73,4 @@ void redirect_stdin(char **stdin, param_t *param)
 		free(*stdin);
 		exit_minishell(param);
 	}
-
-	// parse input
 }

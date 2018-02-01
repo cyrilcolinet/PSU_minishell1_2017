@@ -33,10 +33,11 @@ typedef struct parameters {
 		char **path;
 		env_t 	*environment;
 		int 	exit_sts;
+		int 	fdesc;
 } 		param_t;
 
 void 	exit_minishell(param_t *param);
-int 	minishell(int ac, char **av, char **env);
+int 	minishell(int ac, char **av, char **env, int fd);
 
 int 	env_length(char **env);
 void 	env_configure(char **env, param_t *param);
@@ -46,7 +47,7 @@ void 	proc_signal_handler(int signal);
 void 	signal_handler(int signal);
 
 char 	*my_pathjoin(char *str1, char *str2);
-param_t *configure_params(void);
+param_t *configure_params(int fd);
 
 void 	display_shell(void);
 void 	redirect_stdin(char **stdin, param_t *param);
