@@ -61,4 +61,4 @@ dkms.conf
 # Own project files
 build/
 include/my.h
-my_sh
+mysh
