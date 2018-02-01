@@ -38,8 +38,7 @@ void display_shell(void)
 	my_putstr(pcwd);
 	free(pcwd);
 	my_putstr("\033[0m");
-	my_putstr(" \033[31m︻\033[0m\033[32m┳\033[0m\033[33mデ");
-	my_putstr("\033[0m\033[34m═\033[0m\033[35m—\033[0m$ ");
+	my_putstr(" \033[34m═\033[0m\033[35m—\033[0m$ ");
 }
 
 char *str_configure(unsigned int size)
@@ -61,7 +60,7 @@ void redirect_stdin(char **stdin, param_t *param)
 
 	*stdin = str_configure(1);
 
-	while ((ret = read(param->fdesc, &buffer, 1)) && buffer != '\n') {
+	while ((ret = read(param->fdesc, &buffer, 1)) != -1 && buffer != '\n') {
 		*(*stdin + i++) = buffer;
 		*stdin = my_realloc(*stdin, count, count + 1);
 		count++;
