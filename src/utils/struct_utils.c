@@ -7,6 +7,21 @@
 
 # include "minishell.h"
 
+void free_all(shell_t *shell)
+{
+	env_t *tmp = NULL;
+
+	while (shell->env != NULL) {
+		tmp = shell->env;
+		shell->env = shell->env->next;
+		free(tmp->variable);
+		free(tmp->content);
+		free(tmp);
+	}
+
+	free(shell);
+}
+
 env_t *configure_env(char **env)
 {
 	env_t *env_s = malloc(sizeof(env_t));
@@ -14,6 +29,7 @@ env_t *configure_env(char **env)
 	if (env_s == NULL)
 		return (NULL);
 
+	fill_environment(env_s, env);
 	return (env_s);
 }
 

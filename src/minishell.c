@@ -10,8 +10,13 @@
 int main_minishell(int ac, char **av, char **env)
 {
 	shell_t *shell = configure(env);
+	int status = 0;
+	(void)ac, (void)av;
 
 	if (shell == NULL)
 		return (84);
-	return (0);
+
+	status = shell->status;
+	free_all(shell);
+	return (status);
 }
