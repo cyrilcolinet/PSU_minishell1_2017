@@ -30,7 +30,6 @@ env_t 		*configure_env(char **env);
 shell_t 	*configure(char **env);
 
 // utils/parsing_utils.c
-char 		**separate_environment(char *env);
 char 		*join_next_values(char **array);
 
 // managers/env_manager.c
