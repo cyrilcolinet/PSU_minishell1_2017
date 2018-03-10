@@ -24,4 +24,7 @@
 // minishell.c
 int 		main_minishell(int ac, char **av, char **env);
 
+// utils/struct_utils.c
+shell_t 	*configure(char **env);
+
 # endif

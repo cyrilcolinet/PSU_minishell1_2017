@@ -16,7 +16,8 @@ SRC_DIR 				= 	src/
 TEST_DIR				= 	tests/
 
 SRC_FILES				= 	main.c 						\
-							minishell.c
+							minishell.c 				\
+							utils/struct_utils.c
 
 SRC						= 	$(addprefix $(SRC_DIR), $(SRC_FILES))
 

@@ -9,5 +9,9 @@
 
 int main_minishell(int ac, char **av, char **env)
 {
+	shell_t *shell = configure(env);
+
+	if (shell == NULL)
+		return (84);
 	return (0);
 }

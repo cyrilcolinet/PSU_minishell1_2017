@@ -17,6 +17,7 @@ typedef struct env_t {
 } 	env_t;
 
 typedef struct shell_t {
+	int 			status;
 	env_t 			*env;
 } 	shell_t;
 
