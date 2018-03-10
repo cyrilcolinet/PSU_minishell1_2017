@@ -29,6 +29,9 @@ env_t *configure_env(char **env)
 	if (env_s == NULL)
 		return (NULL);
 
+	env_s->variable = NULL;
+	env_s->content = NULL;
+	env_s->next = NULL;
 	fill_environment(env_s, env);
 	return (env_s);
 }
