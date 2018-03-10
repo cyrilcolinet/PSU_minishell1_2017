@@ -30,6 +30,7 @@ env_t 		*configure_env(char **env);
 shell_t 	*configure(char **env);
 
 // utils/parsing_utils.c
+char 		*realloc_char(char *ptr, unsigned int size);
 char 		*join_next_values(char **array);
 
 // managers/env_manager.c
