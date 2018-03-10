@@ -34,7 +34,7 @@ SRCNAMES			= my_atoi.c 					\
 
 SRC 				= $(addprefix src/, $(SRCNAMES))
 
-CFLAGS 				= -Wall -Wextra -I./include
+CFLAGS 				= -Wall -Wextra -I./include -g3
 
 CC					= gcc
 

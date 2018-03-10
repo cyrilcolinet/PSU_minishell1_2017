@@ -25,6 +25,7 @@ void fill_environment(env_t *env_s, char **env)
 		tmp->next->variable = my_strdup(arr[0]);
 		tmp->next->content = join_next_values(arr);
 		tmp->next->next = NULL;
+		printf("%s\n", *env);
 		printf("%s=%s\n", tmp->next->variable, tmp->next->content);
 		my_freetab(arr);
 		env++;
