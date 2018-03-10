@@ -22,8 +22,7 @@ static int get_wlen(char *str, char delim)
 	return (len);
 }
 
-static char **transform(char *str, int wcount,
-	char delim)
+static char **transform(char *str, int wcount, char delim)
 {
 	int i = 0, j = 0, k = 0, wlen = 0;
 	char **new = malloc(sizeof(*new) * (wcount + 1));

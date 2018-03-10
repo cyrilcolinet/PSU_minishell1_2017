@@ -8,17 +8,15 @@
 # include <stdbool.h>
 # include "my.h"
 
-int my_str_isnum(char *str, bool neg)
+bool my_str_isnum(char *str)
 {
-	if (str[0] == '-' && neg)
+	if (str[0] == '-') {
 		str++;
-
+	}
 	while (*str) {
 		if (*str < '0' || *str > '9')
 			return (false);
-
 		str++;
 	}
-
 	return (true);
 }

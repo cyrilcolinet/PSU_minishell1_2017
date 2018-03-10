@@ -138,7 +138,7 @@ int my_countwords(char *str, char delim);
 ** @return (int) - Return 1 if the string contains only
 ** numeric characters, and 0 otherwise
 **/
-int my_str_isnum(char *str, bool neg);
+bool my_str_isnum(char *str);
 
 /**
 ** Check if the string contains only lowercase characters
@@ -167,7 +167,7 @@ int my_str_isprintable(char *str);
 ** Print string (hexa/char)
 ** @param (char const) *str
 ** @return (int) - Return 0. If the string contains non-printable
-** characters,must be printed hexadecimally (in lowercase letters)
+** characters, must be printed hexadecimally (in lowercase letters)
 **/
 void my_showstr(char *str);
 
@@ -295,7 +295,7 @@ void *my_malloc(unsigned int size);
 /**
 ** Duplicate string
 ** @param (char) *str
-** @return (char*)
+** @return (char *)
 **/
 char *my_strdup(char *str);
 
@@ -366,5 +366,7 @@ bool my_strendswith(char *str1, char *str2);
 char *my_strchr(char *str, char delim);
 
 void my_freetab(char **arr);
+
+bool my_strequ(char *str1, char *str2);
 
 # endif

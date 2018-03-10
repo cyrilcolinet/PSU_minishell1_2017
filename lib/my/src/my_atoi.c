@@ -15,22 +15,18 @@ int my_atoi(char *str)
 
 	if (!(str))
 		return (0);
-
 	if (str[0] == '-') {
 		i = 1;
 		neg = 1;
 	} else if (str[0] == '+') {
 		i = 1;
 	}
-
 	while (str[i] >= 48 && str[i] <= 57) {
 		number *= 10;
 		number += ((int)str[i] - 48);
 		i++;
 	}
-
 	if (neg == 1)
 		number = -number;
-
 	return (number);
 }
