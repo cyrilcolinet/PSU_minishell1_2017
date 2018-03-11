@@ -34,6 +34,8 @@ char 		*realloc_char(char *ptr, unsigned int size);
 char 		*join_next_values(char **array);
 
 // managers/env_manager.c
+void 		env_set_variable(char *var, char *content, shell_t *shell);
+char 		*env_get_variable(char *var, shell_t *shell);
 void 		fill_environment(env_t *env_s, char **env);
 
 # endif
