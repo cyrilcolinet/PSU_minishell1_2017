@@ -13,7 +13,7 @@ void minishell(shell_t *shell)
 	int result = 0;
 
 	while (result != 1) {
-		
+		display_prompt(shell);
 	}
 }
 
