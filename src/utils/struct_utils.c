@@ -19,6 +19,7 @@ void free_all(shell_t *shell)
 		free(tmp);
 	}
 
+	free(shell->path);
 	free(shell);
 }
 
@@ -53,6 +54,8 @@ shell_t *configure(char **env)
 
 	if (shell->env == NULL)
 		return (NULL);
+
+	shell->path = my_strdup(env_get_variable("PATH", shell));
 
 	return (shell);
 }

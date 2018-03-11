@@ -19,7 +19,8 @@ SRC_FILES				= 	main.c 						\
 							minishell.c 				\
 							utils/struct_utils.c 		\
 							utils/parsing_utils.c 		\
-							managers/env_manager.c
+							managers/env_manager.c 		\
+							managers/prompt_manager.c
 
 SRC						= 	$(addprefix $(SRC_DIR), $(SRC_FILES))
 

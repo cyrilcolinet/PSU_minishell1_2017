@@ -40,4 +40,7 @@ void 		env_set_variable(char *var, char *content, shell_t *shell);
 char 		*env_get_variable(char *var, shell_t *shell);
 void 		fill_environment(env_t *env_s, char **env);
 
+// managers/prompt_manager.c
+void 		display_prompt(void);
+
 # endif

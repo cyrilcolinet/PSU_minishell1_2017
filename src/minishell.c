@@ -9,11 +9,12 @@
 
 void minishell(shell_t *shell)
 {
-	printf("%s\n", env_get_variable("PATH", shell));
-	env_set_variable("PATH", "fraise", shell);
-	printf("%s\n", env_get_variable("PATH", shell));
-	env_set_variable("OUIOUIOUI", "Jesaispas", shell);
-	printf("%s\n", env_get_variable("OUIOUIOUI", shell));
+	char *stdin = NULL;
+	int result = 0;
+
+	while (result != 1) {
+		
+	}
 }
 
 int main_minishell(int ac, char **av, char **env)
