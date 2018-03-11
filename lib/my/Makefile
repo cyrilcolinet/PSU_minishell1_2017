@@ -25,6 +25,7 @@ SRCNAMES			= my_atoi.c 					\
 					my_strlen.c 					\
 					my_strtok.c 					\
 					my_strendswith.c 				\
+					my_strstartswith.c 				\
 					my_strjoin_char.c 				\
 					my_strjoin_clear.c 				\
 					my_strjoin.c 					\
