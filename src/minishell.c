@@ -19,6 +19,8 @@ int main_minishell(int ac, char **av, char **env)
 	printf("%s\n", env_get_variable("PATH", shell));
 	env_set_variable("PATH", "fraise", shell);
 	printf("%s\n", env_get_variable("PATH", shell));
+	env_set_variable("OUIOUIOUI", "Jesaispas", shell);
+	printf("%s\n", env_get_variable("OUIOUIOUI", shell));
 
 	status = shell->status;
 	free_all(shell);
