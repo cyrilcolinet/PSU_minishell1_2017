@@ -22,6 +22,7 @@
 # include "structs.h"
 
 // minishell.c
+void 		minishell(shell_t *shell);
 int 		main_minishell(int ac, char **av, char **env);
 
 // utils/struct_utils.c
@@ -34,7 +35,7 @@ char 		*realloc_char(char *ptr, unsigned int size);
 char 		*join_next_values(char **array);
 
 // managers/env_manager.c
-env_t 		*new_environment_entry(char *var, char *content, shell_t *shell);
+env_t 		*new_environment_entry(char *var, char *content, env_t *env);
 void 		env_set_variable(char *var, char *content, shell_t *shell);
 char 		*env_get_variable(char *var, shell_t *shell);
 void 		fill_environment(env_t *env_s, char **env);
