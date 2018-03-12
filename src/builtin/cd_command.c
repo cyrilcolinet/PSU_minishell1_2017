@@ -15,7 +15,16 @@ void change_dir(char *path, shell_t *shell)
 	if (!chdir(path)) {
 		env_set_variable("OLDPWD", cwd, shell);
 	} else {
-		my_putstr("error");
+		my_putstr("cd: ");
+		if (access(path, F_OK) == -1) {
+			my_putstr("no such file or directory: ");
+		} else if (access(path, R_OK) == -1) {
+			my_putstr("permission denied: ");
+		} else {
+			my_putstr("not a directory: ");
+		}
+		my_putstr(path);
+		my_putstr("\n");
 	}
 }
 
@@ -25,7 +34,10 @@ int cd_command(char *stdin, char **arg, shell_t *shell)
 
 	if (arg[1] == NULL) {
 		change_dir(home, shell);
-		return (0);
+	} else if (my_strequ(arg[1], "-")) {
+		change_dir(env_get_variable("OLDPWD", shell), shell);
+	} else {
+		change_dir(arg[1], shell);
 	}
 	return (0);
 }
