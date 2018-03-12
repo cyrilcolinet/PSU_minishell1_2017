@@ -12,8 +12,11 @@ void minishell(shell_t *shell)
 	char *stdin = NULL;
 	int result = 0;
 
-	while (result != 1) {
+	while (result != -1) {
 		display_prompt(shell);
+		redirect_stdin(&stdin);
+		result = command_executor(stdin);
+		free(stdin);
 	}
 }
 

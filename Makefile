@@ -15,12 +15,16 @@ SRC_DIR 				= 	src/
 
 TEST_DIR				= 	tests/
 
-SRC_FILES				= 	main.c 						\
-							minishell.c 				\
-							utils/struct_utils.c 		\
-							utils/parsing_utils.c 		\
-							managers/env_manager.c 		\
-							managers/prompt_manager.c
+SRC_FILES				= 	main.c 								\
+							minishell.c 						\
+							utils/struct_utils.c 				\
+							utils/parsing_utils.c 				\
+							utils/get_next_line.c 				\
+							builtin/exit_command.c 				\
+							managers/env_manager.c 				\
+							managers/prompt_manager.c 			\
+							managers/redirect_manager.c 		\
+							managers/command_manager.c
 
 SRC						= 	$(addprefix $(SRC_DIR), $(SRC_FILES))
 

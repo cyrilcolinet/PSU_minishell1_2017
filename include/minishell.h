@@ -33,6 +33,7 @@ shell_t 	*configure(char **env);
 // utils/parsing_utils.c
 char 		*realloc_char(char *ptr, unsigned int size);
 char 		*join_next_values(char **array);
+char 		*get_next_line(int fdesc);
 
 // managers/env_manager.c
 env_t 		*new_environment_entry(char *var, char *content, env_t *env);
@@ -43,5 +44,11 @@ void 		fill_environment(env_t *env_s, char **env);
 // managers/prompt_manager.c
 char 		*parse_cwd(char *buffer, shell_t *shell);
 void 		display_prompt(shell_t *shell);
+
+// managers/command_manager.c
+int 		command_executor(char *stdin);
+
+// managers/redirect_manager.c
+void 		redirect_stdin(char **stdin);
 
 # endif
