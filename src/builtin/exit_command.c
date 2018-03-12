@@ -6,3 +6,15 @@
 */
 
 # include "minishell.h"
+
+int exit_command(char *stdin,char **arg,  shell_t *shell)
+{
+	int res = -1;
+
+	if (arg[1] == NULL)
+		shell->status = 0;
+	else
+		shell->status = my_atoi(arg[1]);
+
+	return (res);
+}

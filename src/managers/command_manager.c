@@ -7,7 +7,14 @@
 
 # include "minishell.h"
 
-int command_executor(char *stdin)
+int command_executor(char *stdin, shell_t *shell)
 {
+	int res = 0;
+	char **arg = my_strtok(stdin, ' ');
+
+	if (my_strequ(arg[0], "exit"))
+		res = exit_command(stdin, arg, shell);
+
+	my_freetab(arg);
 	return (-1);
 }

@@ -15,7 +15,7 @@ void minishell(shell_t *shell)
 	while (result != -1) {
 		display_prompt(shell);
 		redirect_stdin(&stdin);
-		result = command_executor(stdin);
+		result = command_executor(stdin, shell);
 		free(stdin);
 	}
 }

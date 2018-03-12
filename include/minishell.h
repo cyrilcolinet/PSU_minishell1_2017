@@ -47,7 +47,7 @@ char 		*parse_cwd(char *buffer, shell_t *shell);
 void 		display_prompt(shell_t *shell);
 
 // managers/command_manager.c
-int 		command_executor(char *stdin);
+int 		command_executor(char *stdin, shell_t *shell);
 
 // managers/redirect_manager.c
 void 		redirect_stdin(char **stdin);

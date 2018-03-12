@@ -27,6 +27,7 @@ char *parse_cwd(char *buffer, shell_t *shell)
 		}
 		free(dup);
 	}
+
 	return ((str == NULL ? dup : str));
 }
 
