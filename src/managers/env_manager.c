@@ -20,6 +20,22 @@ env_t *new_environment_entry(char *var, char *content, env_t *env)
 	return (env);
 }
 
+void env_del_variable(char *var, shell_t *shell)
+{
+	env_t *tmp = shell->env;
+
+	while (tmp->next != NULL) {
+		if (my_strequ(tmp->next->variable, var)) {
+			free(tmp->next->variable);
+			free(tmp->next->content);
+			tmp->next = tmp->next->next;
+			free(tmp);
+			return;
+		}
+		tmp = tmp->next;
+	}
+}
+
 void env_set_variable(char *variable, char *content, shell_t *shell)
 {
 	env_t *tmp = shell->env;
