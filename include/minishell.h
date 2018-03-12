@@ -35,6 +35,12 @@ char 		*realloc_char(char *ptr, unsigned int size);
 char 		*join_next_values(char **array);
 char 		*get_next_line(int fdesc);
 
+// builtin/exit_command.c
+int 		exit_command(char *stdin,  char **arg,  shell_t *shell);
+
+// builtin/cd_command.c
+int 		cd_command(char *stdin, char **arg, shell_t *shell);
+
 // managers/env_manager.c
 env_t 		*new_environment_entry(char *var, char *content, env_t *env);
 void 		env_del_variable(char *var, shell_t *shell);

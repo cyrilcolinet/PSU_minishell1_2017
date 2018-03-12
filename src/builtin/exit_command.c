@@ -7,9 +7,10 @@
 
 # include "minishell.h"
 
-int exit_command(char *stdin,char **arg,  shell_t *shell)
+int exit_command(char *stdin, char **arg, shell_t *shell)
 {
 	int res = -1;
+	(void)stdin;
 
 	if (arg[1] == NULL)
 		shell->status = 0;

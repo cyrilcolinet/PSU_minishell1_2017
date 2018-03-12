@@ -21,6 +21,7 @@ SRC_FILES				= 	main.c 								\
 							utils/parsing_utils.c 				\
 							utils/get_next_line.c 				\
 							builtin/exit_command.c 				\
+							builtin/cd_command.c 				\
 							managers/env_manager.c 				\
 							managers/prompt_manager.c 			\
 							managers/redirect_manager.c 		\

@@ -14,7 +14,9 @@ int command_executor(char *stdin, shell_t *shell)
 
 	if (my_strequ(arg[0], "exit"))
 		res = exit_command(stdin, arg, shell);
+	else if (my_strequ(arg[0], "cd"))
+		res = cd_command(stdin, arg, shell);
 
 	my_freetab(arg);
-	return (-1);
+	return (res);
 }
