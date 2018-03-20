@@ -9,6 +9,8 @@
 
 int setenv_command(char *stdin, char **arg, shell_t *shell)
 {
+	(void)stdin;
+	
 	if (arg[1] && arg[2] && arg[3]) {
 		my_putstr("setenv: Too many arguments.\n");
 	} else if (!arg[1]) {

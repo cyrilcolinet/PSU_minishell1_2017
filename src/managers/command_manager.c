@@ -22,6 +22,8 @@ int command_executor(char *stdin, shell_t *shell)
 		res = setenv_command(stdin, arg, shell);
 	else if (my_strequ(arg[0], "unsetenv"))
 		res = unsetenv_command(stdin, arg, shell);
+	else if (my_strequ(arg[0], "printenv"))
+		res = printenv_command(stdin, arg, shell);
 
 	my_freetab(arg);
 	return (res);
