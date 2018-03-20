@@ -41,6 +41,12 @@ int 		exit_command(char *stdin,  char **arg,  shell_t *shell);
 // builtin/cd_command.c
 int 		cd_command(char *stdin, char **arg, shell_t *shell);
 
+// builtin/setenv_command.c
+int 		setenv_command(char *stdin, char **arg, shell_t *shell);
+
+// builtin/unsetenv_command.c
+int 		unsetenv_command(char *stdin, char **arg, shell_t *shell);
+
 // actions/environment_actions.c
 void 		env_del_variable(char *var, shell_t *shell);
 void 		env_set_variable(char *var, char *content, shell_t *shell);

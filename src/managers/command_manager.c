@@ -18,6 +18,10 @@ int command_executor(char *stdin, shell_t *shell)
 		res = cd_command(stdin, arg, shell);
 	else if (my_strequ(arg[0], "env"))
 		print_environment(shell);
+	else if (my_strequ(arg[0], "setenv"))
+		res = setenv_command(stdin, arg, shell);
+	else if (my_strequ(arg[0], "unsetenv"))
+		res = unsetenv_command(stdin, arg, shell);
 
 	my_freetab(arg);
 	return (res);

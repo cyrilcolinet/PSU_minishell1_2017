@@ -10,13 +10,15 @@
 void env_del_variable(char *var, shell_t *shell)
 {
 	env_t *tmp = shell->env;
+	env_t *tmp2 = NULL;
 
 	while (tmp->next != NULL) {
 		if (my_strequ(tmp->next->variable, var)) {
 			free(tmp->next->variable);
 			free(tmp->next->content);
+			tmp2 = tmp->next;
 			tmp->next = tmp->next->next;
-			free(tmp);
+			free(tmp2);
 			return;
 		}
 		tmp = tmp->next;
