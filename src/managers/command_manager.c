@@ -9,7 +9,7 @@
 
 int check_builtin(char *stdin, char **arg, shell_t *shell)
 {
-	int res = 1;
+	int res = 0;
 
 	if (my_strequ(arg[0], "exit"))
 		res = exit_command(stdin, arg, shell);
