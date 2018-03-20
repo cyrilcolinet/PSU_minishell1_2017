@@ -14,7 +14,7 @@ char *parse_cwd(char *buffer, shell_t *shell)
 	int loop = 0;
 	char *str = NULL;
 
-	if (my_strstartswith(dup, home)) {
+	if (home != NULL && my_strstartswith(dup, home)) {
 		str = my_strconfigure(1 + (my_strlen(buffer) - my_strlen(home)));
 		if (str == NULL)
 			return (NULL);
