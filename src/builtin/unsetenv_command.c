@@ -13,11 +13,11 @@ int unsetenv_command(char *stdin, char **arg, shell_t *shell)
 
 	if (!arg[1]) {
 		my_putstr("unsetenv: Too few arguments.\n");
-		return (0);
+		return (1);
 	}
 
 	while (arg[i] != NULL)
 		env_del_variable(arg[i++], shell);
 
-	return (0);
+	return (1);
 }

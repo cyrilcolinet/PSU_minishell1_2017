@@ -18,6 +18,8 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 
+typedef struct stat stat_t;
+
 # include "my.h"
 # include "structs.h"
 
@@ -34,6 +36,7 @@ shell_t 	*configure(char **env);
 char 		*realloc_char(char *ptr, unsigned int size);
 char 		*join_next_values(char **array);
 char 		*get_next_line(int fdesc);
+char 		*path_join(char *str1, char *str2);
 
 // builtin/exit_command.c
 int 		exit_command(char *stdin,  char **arg,  shell_t *shell);
@@ -65,7 +68,11 @@ void 		fill_environment(env_t *env_s, char **env);
 char 		*parse_cwd(char *buffer, shell_t *shell);
 void 		display_prompt(shell_t *shell);
 
+// managers/check_binaries.c
+
+
 // managers/command_manager.c
+int 		check_builtin(char *stdin, char **arg, shell_t *shell);
 int 		command_executor(char *stdin, shell_t *shell);
 
 // managers/redirect_manager.c

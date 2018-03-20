@@ -44,3 +44,25 @@ char *join_next_values(char **array)
 	}
 	return (str);
 }
+
+char *path_join(char *str1, char *str2)
+{
+	char *tmp2 = NULL;
+
+	if (!str1 || !str2)
+		return (NULL);
+	if (!my_strendswith(str1, "/")) {
+		if (str2[0] == '/') {
+			return (my_strjoin(str1, str2));
+		} else {
+			tmp2 = my_strjoin_clear(my_strjoin_char(str1, '/'), str2, 0);
+			return (tmp2);
+		}
+	}
+
+	if (str2[0] == '/') {
+		return (my_strjoin(str1, str2 + 1));
+	}
+
+	return (my_strjoin(str1, str2));
+}

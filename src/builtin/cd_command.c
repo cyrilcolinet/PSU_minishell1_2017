@@ -41,5 +41,5 @@ int cd_command(char *stdin, char **arg, shell_t *shell)
 			change_dir(arg[1], shell);
 		}
 	}
-	return (0);
+	return (1);
 }
