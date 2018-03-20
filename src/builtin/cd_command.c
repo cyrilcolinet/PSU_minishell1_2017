@@ -32,12 +32,16 @@ int cd_command(char *stdin, char **arg, shell_t *shell)
 {
 	char *home = env_get_variable("HOME", shell);
 
-	if (arg[1] == NULL) {
-		change_dir(home, shell);
-	} else if (my_strequ(arg[1], "-")) {
-		change_dir(env_get_variable("OLDPWD", shell), shell);
+	if (arg[1] != NULL && arg[2] != NULL) {
+		my_putstr("cd: too many arguuments\n");
 	} else {
-		change_dir(arg[1], shell);
+		if (arg[1] == NULL) {
+			change_dir(home, shell);
+		} else if (my_strequ(arg[1], "-")) {
+			change_dir(env_get_variable("OLDPWD", shell), shell);
+		} else {
+			change_dir(arg[1], shell);
+		}
 	}
 	return (0);
 }

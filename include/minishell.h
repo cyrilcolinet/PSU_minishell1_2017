@@ -41,11 +41,14 @@ int 		exit_command(char *stdin,  char **arg,  shell_t *shell);
 // builtin/cd_command.c
 int 		cd_command(char *stdin, char **arg, shell_t *shell);
 
-// managers/env_manager.c
-env_t 		*new_environment_entry(char *var, char *content, env_t *env);
+// actions/environment_actions.c
 void 		env_del_variable(char *var, shell_t *shell);
 void 		env_set_variable(char *var, char *content, shell_t *shell);
 char 		*env_get_variable(char *var, shell_t *shell);
+
+// managers/env_manager.c
+env_t 		*new_environment_entry(char *var, char *content, env_t *env);
+void 		print_environment(shell_t *shell);
 void 		fill_environment(env_t *env_s, char **env);
 
 // managers/prompt_manager.c

@@ -25,7 +25,8 @@ SRC_FILES				= 	main.c 								\
 							managers/env_manager.c 				\
 							managers/prompt_manager.c 			\
 							managers/redirect_manager.c 		\
-							managers/command_manager.c
+							managers/command_manager.c 			\
+							actions/environment_actions.c
 
 SRC						= 	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
