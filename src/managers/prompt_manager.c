@@ -10,11 +10,11 @@
 char *parse_cwd(char *buffer, shell_t *shell)
 {
 	char *dup = my_strdup(buffer);
-	char *home = env_get_variable("HOME", shell);
+	char *home = shell->home;
 	int loop = 0;
 	char *str = NULL;
 
-	if (home != NULL && my_strstartswith(dup, home)) {
+	if (my_strstartswith(dup, home)) {
 		str = my_strconfigure(1 + (my_strlen(buffer) - my_strlen(home)));
 		if (str == NULL)
 			return (NULL);

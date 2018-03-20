@@ -51,6 +51,7 @@ int 		unsetenv_command(char *stdin, char **arg, shell_t *shell);
 void 		env_del_variable(char *var, shell_t *shell);
 void 		env_set_variable(char *var, char *content, shell_t *shell);
 char 		*env_get_variable(char *var, shell_t *shell);
+void 		env_check_home_change(shell_t *shell);
 
 // managers/env_manager.c
 env_t 		*new_environment_entry(char *var, char *content, env_t *env);

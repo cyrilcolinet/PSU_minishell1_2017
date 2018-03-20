@@ -28,14 +28,11 @@ void env_del_variable(char *var, shell_t *shell)
 void env_set_variable(char *variable, char *content, shell_t *shell)
 {
 	env_t *tmp = shell->env;
-	char *tmp_cont = NULL;
-	char *v = NULL;
-	char *c = NULL;
+	char *tmp_cont = NULL, *v = NULL, *c = NULL;
 
 	while (tmp->next != NULL) {
 		if (my_strequ(tmp->next->variable, variable)) {
-			tmp_cont = my_strdup(content);
-			tmp_cont = realloc_char(tmp_cont, my_strlen(content));
+			tmp_cont = realloc_char(my_strdup(content), my_strlen(content));
 			free(tmp->next->content);
 			tmp->next->content = my_strdup(tmp_cont);
 			free(tmp_cont);
@@ -44,8 +41,7 @@ void env_set_variable(char *variable, char *content, shell_t *shell)
 		tmp = tmp->next;
 	}
 
-	v = my_strdup(variable);
-	c = my_strdup(content);
+	v = my_strdup(variable), c = my_strdup(content);
 	tmp->next = new_environment_entry(v, c, tmp->next);
 }
 
@@ -60,4 +56,15 @@ char *env_get_variable(char *variable, shell_t *shell)
 	}
 
 	return (NULL);
+}
+
+void env_check_home_change(shell_t *shell)
+{
+	char *home = env_get_variable("HOME", shell);
+
+	if (home == NULL || my_strequ(home, shell->home))
+		return;
+
+	free(shell->home);
+	shell->home = my_strdup(home);
 }

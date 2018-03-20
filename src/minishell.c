@@ -17,6 +17,7 @@ void minishell(shell_t *shell)
 		display_prompt(shell);
 		redirect_stdin(&stdin);
 		result = command_executor(stdin, shell);
+		env_check_home_change(shell);
 		free(stdin);
 	}
 }

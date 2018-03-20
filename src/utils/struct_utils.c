@@ -19,6 +19,7 @@ void free_all(shell_t *shell)
 		free(tmp);
 	}
 
+	free(shell->home);
 	free(shell->path);
 	free(shell);
 }
@@ -56,6 +57,7 @@ shell_t *configure(char **env)
 		return (NULL);
 
 	shell->path = my_strdup(env_get_variable("PATH", shell));
+	shell->home = my_strdup(env_get_variable("HOME", shell));
 
 	return (shell);
 }
