@@ -71,11 +71,11 @@ void 		display_prompt(shell_t *shell);
 
 // managers/check_binaries.c
 bool 		can_be_executed(char *path, stat_t i, char **arg, shell_t *shell);
-bool 		check_binaries(char **arg, shell_t *shell);
+bool 		bins(char **arg, shell_t *shell);
 
 // managers/command_manager.c
 bool 		run_command(char *bin_path, char **arg, shell_t *shell);
-int 		check_builtin(char *stdin, char **arg, shell_t *shell);
+int 		builtin(char *stdin, char **arg, shell_t *shell);
 int 		command_executor(char *stdin, shell_t *shell);
 
 // managers/redirect_manager.c

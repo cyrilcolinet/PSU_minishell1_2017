@@ -29,7 +29,7 @@ bool run_command(char *bin_path, char **arg, shell_t *shell)
 	return (true);
 }
 
-int check_builtin(char *stdin, char **arg, shell_t *shell)
+int builtin(char *stdin, char **arg, shell_t *shell)
 {
 	int res = 0;
 
@@ -54,8 +54,12 @@ int command_executor(char *stdin, shell_t *shell)
 	int res = 1;
 	char **arg = my_strtok(stdin, ' ');
 
-	if ((res = check_builtin(stdin, arg, shell)) == 1 \
-	|| check_binaries(arg, shell)) {
+	if (arg[0] == NULL) {
+		my_freetab(arg);
+		return (1);
+	}
+
+	if ((res = builtin(stdin, arg, shell)) == 1 || bins(arg, shell)) {
 		my_freetab(arg);
 		return (res);
 	} else if (res < 0) {

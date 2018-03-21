@@ -25,7 +25,7 @@ bool can_be_executed(char *path, stat_t i, char **arg, shell_t *shell)
 	return (false);
 }
 
-bool check_binaries(char **arg, shell_t *shell)
+bool bins(char **arg, shell_t *shell)
 {
 	int i = -1;
 	char **path = my_strtok(shell->path, ':');

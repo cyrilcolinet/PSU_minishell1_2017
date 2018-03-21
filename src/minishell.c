@@ -13,7 +13,7 @@ void minishell(shell_t *shell)
 	int result = 0;
 
 	while (result != -1) {
-		signal(SIGINT, SIG_IGN);
+		signal(SIGINT, SIG_IGN); // TODO: à faire
 		display_prompt(shell);
 		redirect_stdin(&stdin);
 		result = command_executor(stdin, shell);
