@@ -62,9 +62,9 @@ void env_check_home_change(shell_t *shell)
 {
 	char *home = env_get_variable("HOME", shell);
 
-	if (home == NULL || my_strequ(home, shell->home))
+	if (home == NULL || my_strequ(home, env_home))
 		return;
 
-	free(shell->home);
-	shell->home = my_strdup(home);
+	free(env_home);
+	env_home = my_strdup(home);
 }

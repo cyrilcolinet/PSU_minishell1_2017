@@ -30,7 +30,8 @@ SRC_FILES				= 	main.c 								\
 							managers/redirect_manager.c 		\
 							managers/check_binaries.c 			\
 							managers/command_manager.c 			\
-							actions/environment_actions.c
+							actions/environment_actions.c 		\
+							handlers/signal_handler.c
 
 SRC						= 	$(addprefix $(SRC_DIR), $(SRC_FILES))
 

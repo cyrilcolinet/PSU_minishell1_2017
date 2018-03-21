@@ -13,8 +13,8 @@ void minishell(shell_t *shell)
 	int result = 0;
 
 	while (result != -1) {
-		signal(SIGINT, SIG_IGN); // TODO: à faire
-		display_prompt(shell);
+		signal(SIGINT, signal_handler);
+		display_prompt();
 		redirect_stdin(&stdin);
 		result = command_executor(stdin, shell);
 		env_check_home_change(shell);

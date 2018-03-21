@@ -23,6 +23,8 @@ typedef struct stat stat_t;
 # include "my.h"
 # include "structs.h"
 
+char 		*env_home;
+
 // minishell.c
 void 		minishell(shell_t *shell);
 int 		main_minishell(int ac, char **av, char **env);
@@ -66,8 +68,8 @@ void 		print_environment(shell_t *shell);
 void 		fill_environment(env_t *env_s, char **env);
 
 // managers/prompt_manager.c
-char 		*parse_cwd(char *buffer, shell_t *shell);
-void 		display_prompt(shell_t *shell);
+char 		*parse_cwd(char *buffer);
+void 		display_prompt(void);
 
 // managers/check_binaries.c
 bool 		can_be_executed(char *path, stat_t i, char **arg, shell_t *shell);
@@ -80,5 +82,9 @@ int 		command_executor(char *stdin, shell_t *shell);
 
 // managers/redirect_manager.c
 void 		redirect_stdin(char **stdin);
+
+// handlers/signal_handler.c
+void 		signal_handler(int signo);
+void 		proc_signal_handler(int signo);
 
 # endif

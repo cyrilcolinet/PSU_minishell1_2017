@@ -12,7 +12,7 @@ bool run_command(char *bin_path, char **arg, shell_t *shell)
 	pid_t pid = fork();
 	char **env = convert_list_to_array(shell->env);
 
-	signal(SIGINT, SIG_IGN); // TODO: à faire
+	signal(SIGINT, proc_signal_handler);
 	if (pid == 0) {
 		if (env)
 			execve(bin_path, arg, env);

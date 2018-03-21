@@ -7,10 +7,10 @@
 
 # include "minishell.h"
 
-char *parse_cwd(char *buffer, shell_t *shell)
+char *parse_cwd(char *buffer)
 {
 	char *dup = my_strdup(buffer);
-	char *home = shell->home;
+	char *home = env_home;
 	int loop = 0;
 	char *str = NULL;
 
@@ -31,11 +31,11 @@ char *parse_cwd(char *buffer, shell_t *shell)
 	return ((str == NULL ? dup : str));
 }
 
-void display_prompt(shell_t *shell)
+void display_prompt(void)
 {
 	char buffer[4097];
 	char *cwd = getcwd(buffer, 4096);
-	char *pcwd = parse_cwd(cwd, shell);
+	char *pcwd = parse_cwd(cwd);
 
 	my_putstr("\033[1m");
 	my_putstr(pcwd);

@@ -34,7 +34,7 @@ int cd_command(char *stdin, char **arg, shell_t *shell)
 		my_putstr("cd: too many arguuments\n");
 	} else {
 		if (arg[1] == NULL) {
-			change_dir(shell->home, shell);
+			change_dir(env_home, shell);
 		} else if (my_strequ(arg[1], "-")) {
 			change_dir(env_get_variable("OLDPWD", shell), shell);
 		} else {
