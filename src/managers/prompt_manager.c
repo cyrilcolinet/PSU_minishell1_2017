@@ -35,12 +35,15 @@ void display_prompt(void)
 {
 	char buffer[4097];
 	char *cwd = getcwd(buffer, 4096);
-	char *pcwd = parse_cwd(cwd);
+	char *pcwd = NULL;
 
-	my_putstr("\033[1m");
-	my_putstr(pcwd);
-	free(pcwd);
-	my_putstr("\033[0m");
-	my_putstr(" \033[31m︻\033[0m\033[32m┳\033[0m\033[33mデ");
-	my_putstr("\033[0m\033[34m═\033[0m\033[35m—\033[0m$ ");
+	if (isatty(0)) {
+		pcwd = parse_cwd(cwd);
+		my_putstr("\033[1m");
+		my_putstr(pcwd);
+		free(pcwd);
+		my_putstr("\033[0m");
+		my_putstr(" \033[31m︻\033[0m\033[32m┳\033[0m\033[33mデ");
+		my_putstr("\033[0m\033[34m═\033[0m\033[35m—\033[0m$ ");
+	}
 }
