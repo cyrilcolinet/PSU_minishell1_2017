@@ -11,32 +11,27 @@ bool run_command(char *bin_path, char **arg, shell_t *shell)
 {
 	pid_t pid = fork();
 	int ret = 0;
-	pid_t wait_ret = 0;
-	char **env = convert_list_to_array(shell->env);
+	pid_t wait_ret = pid;
+	char **env = NULL;
 
 	signal(SIGINT, proc_signal_handler);
 	if (pid == 0) {
-		if (env)
+		if ((env = convert_list_to_array(shell->env)) != NULL)
 			execve(bin_path, arg, env);
-	} else if (pid > 0) {
-		wait_ret = wait(&ret);
-		if (WTERMSIG(ret) != 0 && WTERMSIG(ret) != SIGINT) {
-			my_putstr(strsignal(WTERMSIG(ret)));
-			my_putstr("\n");
-			my_freetab(env);
-			kill(wait_ret, SIGKILL);
-			return (ret);
-		}
-	} else {
+		my_freetab(env);
+	} else if (pid < 0) {
 		free(bin_path);
 		my_putstr("Fork failed to create new process.\n");
-		my_freetab(env);
 		return (false);
+	}
+	wait_ret = waitpid(pid, &ret, 0);
+	if (WTERMSIG(ret) != 0 && WTERMSIG(ret) != SIGINT) {
+		my_putstr(strsignal(WTERMSIG(ret)));
+		my_putstr("\n");
 	}
 	kill(wait_ret, SIGKILL);
 	if (bin_path)
 		free(bin_path);
-	my_freetab(env);
 	return (true);
 }
 
@@ -86,7 +81,6 @@ int command_executor(char *stdin, shell_t *shell)
 			return (1);
 		}
 	}
-
 	my_putstr(arg[0]);
 	my_putstr(" : Command not found.\n");
 	my_freetab(arg);
