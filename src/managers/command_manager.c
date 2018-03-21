@@ -20,7 +20,7 @@ bool run_command(char *bin_path, char **arg, shell_t *shell)
 			execve(bin_path, arg, env);
 	} else if (pid > 0) {
 		wait_ret = wait(&ret);
-		if (WTERMSIG(ret) != 0) {
+		if (WTERMSIG(ret) != 0 && WTERMSIG(ret) != SIGINT) {
 			my_putstr(strsignal(WTERMSIG(ret)));
 			my_putstr("\n");
 			my_freetab(env);
