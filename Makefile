@@ -28,6 +28,7 @@ SRC_FILES				= 	main.c 								\
 							managers/env_manager.c 				\
 							managers/prompt_manager.c 			\
 							managers/redirect_manager.c 		\
+							managers/check_binaries.c 			\
 							managers/command_manager.c 			\
 							actions/environment_actions.c
 

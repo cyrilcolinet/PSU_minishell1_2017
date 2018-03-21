@@ -9,7 +9,12 @@
 
 int main(int ac, char **av, char **env)
 {
-	int res = main_minishell(ac, av, env);
+	int res = 84;
+
+	if (*env == NULL)
+		return (res);
+
+	res = main_minishell(ac, av, env);
 
 	return (res);
 }

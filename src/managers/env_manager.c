@@ -7,6 +7,30 @@
 
 # include "minishell.h"
 
+char **convert_list_to_array(env_t *envlist)
+{
+	char **env = NULL;
+	int count = 0, i = 0;
+	char *data = NULL;
+	env_t *tmp = envlist;
+
+	while (tmp->next != NULL)
+		tmp = tmp->next, count++;
+	if (count == 0)
+		return (NULL);
+	env = malloc(sizeof(*env) * (count + 1));
+	tmp = envlist;
+	while (tmp->next != NULL) {
+		data = my_strjoin_clear(my_strjoin_char(tmp->next->variable, '='), \
+		tmp->next->content, 0);
+		env[i++] = my_strdup(data);
+		free(data);
+		tmp = tmp->next;
+	}
+	env[count] = NULL;
+	return (env);
+}
+
 env_t *new_environment_entry(char *var, char *content, env_t *env)
 {
 	env = malloc(sizeof(env_t));

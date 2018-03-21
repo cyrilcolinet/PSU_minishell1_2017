@@ -7,6 +7,28 @@
 
 # include "minishell.h"
 
+bool run_command(char *bin_path, char **arg, shell_t *shell)
+{
+	pid_t pid = fork();
+	char **env = convert_list_to_array(shell->env);
+
+	signal(SIGINT, SIG_IGN); // TODO: à faire
+	if (pid == 0) {
+		if (env)
+			execve(bin_path, arg, env);
+	} else if (pid < 0) {
+		free(bin_path);
+		my_putstr("Fork failed to create new process.\n");
+		my_freetab(env);
+		return (false);
+	}
+	wait(&pid);
+	if (bin_path)
+		free(bin_path);
+	my_freetab(env);
+	return (true);
+}
+
 int check_builtin(char *stdin, char **arg, shell_t *shell)
 {
 	int res = 0;
@@ -32,7 +54,8 @@ int command_executor(char *stdin, shell_t *shell)
 	int res = 1;
 	char **arg = my_strtok(stdin, ' ');
 
-	if ((res = check_builtin(stdin, arg, shell)) == 1) {
+	if ((res = check_builtin(stdin, arg, shell)) == 1 \
+	|| check_binaries(arg, shell)) {
 		my_freetab(arg);
 		return (res);
 	} else if (res < 0) {

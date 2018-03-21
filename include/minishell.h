@@ -60,6 +60,7 @@ char 		*env_get_variable(char *var, shell_t *shell);
 void 		env_check_home_change(shell_t *shell);
 
 // managers/env_manager.c
+char 		**convert_list_to_array(env_t *envlist);
 env_t 		*new_environment_entry(char *var, char *content, env_t *env);
 void 		print_environment(shell_t *shell);
 void 		fill_environment(env_t *env_s, char **env);
@@ -69,9 +70,11 @@ char 		*parse_cwd(char *buffer, shell_t *shell);
 void 		display_prompt(shell_t *shell);
 
 // managers/check_binaries.c
-
+bool 		can_be_executed(char *path, stat_t i, char **arg, shell_t *shell);
+bool 		check_binaries(char **arg, shell_t *shell);
 
 // managers/command_manager.c
+bool 		run_command(char *bin_path, char **arg, shell_t *shell);
 int 		check_builtin(char *stdin, char **arg, shell_t *shell);
 int 		command_executor(char *stdin, shell_t *shell);
 
