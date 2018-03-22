@@ -11,9 +11,10 @@ bool run_command(char *bin_path, char **arg, shell_t *shell)
 {
 	pid_t pid = fork();
 	int ret = 0;
-	pid_t wait_ret = pid;
+	int wait_ret = -1;
 	char **env = NULL;
 
+	printf("fork = %d, %s\n", pid, bin_path);
 	signal(SIGINT, proc_signal_handler);
 	if (pid == 0) {
 		if ((env = convert_list_to_array(shell->env)) != NULL)
@@ -76,7 +77,7 @@ int command_executor(char *stdin, shell_t *shell)
 
 	if (lstat(arg[0], &info) != -1) {
 		if (info.st_mode & S_IXUSR) {
-			run_command(arg[0], arg, shell);
+			run_command(my_strdup(arg[0]), arg, shell);
 			my_freetab(arg);
 			return (1);
 		}

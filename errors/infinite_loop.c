@@ -8,8 +8,9 @@
 int main(void)
 {
 	int a = 0;
+
 	while (1) {
-a++;
+		a++;
 	}
-return (0);
+	return (0);
 }
