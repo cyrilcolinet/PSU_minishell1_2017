@@ -9,6 +9,7 @@
 # define MINISHELL_STRUCTS_H
 
 struct 	env_t;
+struct 	shell_t;
 
 typedef struct env_t {
 	char 			*variable;
@@ -19,6 +20,7 @@ typedef struct env_t {
 typedef struct shell_t {
 	int 			status;
 	char 			*path;
+	int 			cmd_ret;
 	env_t 			*env;
 } 	shell_t;
 

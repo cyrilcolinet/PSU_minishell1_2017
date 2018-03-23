@@ -25,6 +25,7 @@ SRC_FILES				= 	main.c 								\
 							builtin/setenv_command.c 			\
 							builtin/unsetenv_command.c 			\
 							builtin/printenv_command.c 			\
+							builtin/echo_command.c 				\
 							managers/env_manager.c 				\
 							managers/prompt_manager.c 			\
 							managers/redirect_manager.c 		\

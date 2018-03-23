@@ -10,11 +10,9 @@
 bool run_command(char *bin_path, char **arg, shell_t *shell)
 {
 	pid_t pid = fork();
-	int ret = 0;
 	int wait_ret = -1;
 	char **env = NULL;
 
-	printf("fork = %d, %s\n", pid, bin_path);
 	signal(SIGINT, proc_signal_handler);
 	if (pid == 0) {
 		if ((env = convert_list_to_array(shell->env)) != NULL)
@@ -25,9 +23,9 @@ bool run_command(char *bin_path, char **arg, shell_t *shell)
 		my_putstr("Fork failed to create new process.\n");
 		return (false);
 	}
-	wait_ret = waitpid(pid, &ret, 0);
-	if (WTERMSIG(ret) != 0 && WTERMSIG(ret) != SIGINT) {
-		my_putstr(strsignal(WTERMSIG(ret)));
+	wait_ret = waitpid(pid, &shell->cmd_ret, 0);
+	if (WTERMSIG(shell->cmd_ret) != 0 && WTERMSIG(shell->cmd_ret) != SIGINT) {
+		my_putstr(strsignal(WTERMSIG(shell->cmd_ret)));
 		my_putstr("\n");
 	}
 	kill(wait_ret, SIGKILL);
@@ -45,13 +43,15 @@ int builtin(char *stdin, char **arg, shell_t *shell)
 	else if (my_strequ(arg[0], "cd"))
 		res = cd_command(stdin, arg, shell);
 	else if (my_strequ(arg[0], "env"))
-		print_environment(shell);
+		print_environment(shell), res = 1;
 	else if (my_strequ(arg[0], "setenv"))
 		res = setenv_command(stdin, arg, shell);
 	else if (my_strequ(arg[0], "unsetenv"))
 		res = unsetenv_command(stdin, arg, shell);
 	else if (my_strequ(arg[0], "printenv"))
 		res = printenv_command(stdin, arg, shell);
+	else if (my_strequ(stdin, "echo $?"))
+		res = echo_command(stdin, arg, shell);
 
 	return (res);
 }

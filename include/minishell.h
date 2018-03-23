@@ -55,6 +55,9 @@ int 		unsetenv_command(char *stdin, char **arg, shell_t *shell);
 // builtin/printenv_command.c
 int 		printenv_command(char *stdin, char **arg, shell_t *shell);
 
+// builtin/echo_command.c
+int 		echo_command(char *stdin, char **arg, shell_t *shell);
+
 // actions/environment_actions.c
 void 		env_del_variable(char *var, shell_t *shell);
 void 		env_set_variable(char *var, char *content, shell_t *shell);
