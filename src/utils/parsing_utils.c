@@ -66,3 +66,22 @@ char *path_join(char *str1, char *str2)
 
 	return (my_strjoin(str1, str2));
 }
+
+char *replace_char(char *str, char find, char replace)
+{
+	char *ret = NULL;
+	int i = 0;
+
+	if (!str)
+		return (NULL);
+
+	ret = my_strdup(str);
+	free(str);
+	while (ret[i]) {
+		if (ret[i] == find)
+			ret[i] = replace;
+		i++;
+	}
+
+	return (ret);
+}

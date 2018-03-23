@@ -10,4 +10,9 @@
 void redirect_stdin(char **stdin)
 {
 	*stdin = get_next_line(0);
+
+	if (*stdin == NULL)
+		return;
+
+	*stdin = replace_char(*stdin, '\t', ' ');
 }

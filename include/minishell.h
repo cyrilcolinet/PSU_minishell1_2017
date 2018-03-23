@@ -39,6 +39,7 @@ char 		*realloc_char(char *ptr, unsigned int size);
 char 		*join_next_values(char **array);
 char 		*get_next_line(int fdesc);
 char 		*path_join(char *str1, char *str2);
+char 		*replace_char(char *str, char find, char replace);
 
 // builtin/exit_command.c
 int 		exit_command(char *stdin,  char **arg,  shell_t *shell);
