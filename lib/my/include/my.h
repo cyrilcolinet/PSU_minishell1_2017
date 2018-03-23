@@ -120,7 +120,7 @@ int my_strncmp(char *s1, char *s2, int n);
 ** @return (int) - Return 1 if the string contains only
 ** alphanumeric characters, and 0 otherwise
 **/
-int my_str_isalpha(char *str);
+bool my_str_isalpha(char *str);
 
 /**
 ** Count delimer parts
