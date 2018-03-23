@@ -20,9 +20,9 @@ char **convert_list_to_array(env_t *envlist)
 		return (NULL);
 	env = malloc(sizeof(*env) * (count + 1));
 	tmp = envlist;
-	while (tmp->next != NULL) {
-		data = my_strjoin_clear(my_strjoin_char(tmp->next->variable, '='), \
-		tmp->next->content, 0);
+	while (tmp->next) {
+		data = my_strjoin_clear(my_strjoin_char(tmp->next->variable, \
+		'='), tmp->next->content, 0);
 		env[i++] = my_strdup(data);
 		free(data);
 		tmp = tmp->next;
